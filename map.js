@@ -81,7 +81,7 @@ let playerPath = [
     { x: 219, y: 524 },
     { x: 264, y: 550 },
     { x: 309, y: 524 },
-    { x: 309, y: 472 },    
+    { x: 309, y: 472 },
     { x: 354, y: 446 },
     { x: 399, y: 420 },
     { x: 444, y: 446 },
@@ -90,7 +90,7 @@ let playerPath = [
     { x: 579, y: 472 },
     { x: 624, y: 498 },
     { x: 669, y: 472 },
-    { x: 714, y: 446 },    
+    { x: 714, y: 446 },
     { x: 759, y: 472 },
     { x: 804, y: 498 },
     { x: 849, y: 524 },
@@ -100,7 +100,7 @@ let playerPath = [
     { x: 714, y: 654 },
     { x: 669, y: 628 },
     //{ x: 624, y: 654 },
-   // { x: 579, y: 628 },
+    // { x: 579, y: 628 },
     //{ x: 534, y: 654 },
     //{ x: 489, y: 628 },
     { x: 444, y: 602 },
@@ -136,9 +136,9 @@ let playerPath = [
 let blackHoles = [
     { x: 624, y: 654 },
     { x: 579, y: 628 },
-     { x: 534, y: 654 },
-     { x: 489, y: 628 },
-    ]
+    { x: 534, y: 654 },
+    { x: 489, y: 628 },
+]
 
 let xOne = 39;
 let xTwo = 84
@@ -174,7 +174,7 @@ function drawOddLines(xOne, y, yIndex, xTwo) {
         yIndex = 0;
 
         fill = playerPath.filter(e => e.x === xOne && e.y === y[yIndex]).length > 0 ? '#0F0' : '#A9ACB6';
-        if(blackHoles.filter(e => e.x === xOne && e.y === y[yIndex]).length > 0 ){
+        if (blackHoles.filter(e => e.x === xOne && e.y === y[yIndex]).length > 0) {
             fill = '#EF3D39';
         }
 
@@ -193,7 +193,7 @@ function drawOddLines(xOne, y, yIndex, xTwo) {
 
         for (let index = 0; index < 2; index++) {
             fill = playerPath.filter(e => e.x === xTwo && e.y === y[yIndex]).length > 0 ? '#0F0' : '#A9ACB6'
-            if(blackHoles.filter(e => e.x === xTwo && e.y === y[yIndex]).length > 0 ){
+            if (blackHoles.filter(e => e.x === xTwo && e.y === y[yIndex]).length > 0) {
                 fill = '#EF3D39';
             }
             paper.path(NGon(xTwo, y[yIndex], 6, 30)).attr({
@@ -220,7 +220,7 @@ function drawEvenLines(xOne, y, yIndex, xTwo) {
     let elText = '';
     while (xTwo <= 894) {
         fill = playerPath.filter(e => e.x === xOne && e.y === y[yIndex]).length > 0 ? '#0F0' : '#A9ACB6'
-        if(blackHoles.filter(e => e.x === xOne && e.y === y[yIndex]).length > 0 ){
+        if (blackHoles.filter(e => e.x === xOne && e.y === y[yIndex]).length > 0) {
             fill = '#EF3D39';
         }
         yIndex = 0;
@@ -238,7 +238,7 @@ function drawEvenLines(xOne, y, yIndex, xTwo) {
 
         for (let index = 0; index < 2; index++) {
             fill = playerPath.filter(e => e.x === xTwo && e.y === y[yIndex]).length > 0 ? '#0F0' : '#A9ACB6'
-            if(blackHoles.filter(e => e.x === xTwo && e.y === y[yIndex]).length > 0 ){
+            if (blackHoles.filter(e => e.x === xTwo && e.y === y[yIndex]).length > 0) {
                 fill = '#EF3D39';
             }
             paper.path(NGon(xTwo, y[yIndex], 6, 30)).attr({
@@ -259,6 +259,33 @@ function drawEvenLines(xOne, y, yIndex, xTwo) {
     }
 }
 
+let image = paper.image("falcon.png", playerPath[0].x - 30, playerPath[0].y - 90, 60, 100).attr({
+    index: 0
+});
+
+let button = document.getElementById('rollDice');
+button.addEventListener("click", function (event) {
+    rollDice(image)
+});
+// button.addEventListener('click', (image) => {
+//    let num = 5
+//    console.log(image.x);
+
+//    console.log(image.index);
+
+
+//     image.animate({ x: playerPath[num].x - 30, y: playerPath[num].y - 90 }, 3000);
+// })
+let currIndex = 0;
+function rollDice(image) {
+    let num = Math.floor(Math.random() * 6) + 1
+    let futureIndex = currIndex + num;
+    while (currIndex < futureIndex) {
+        console.log(currIndex);
+        image.animate({ x: playerPath[currIndex + 1].x - 30, y: playerPath[currIndex + 1].y - 90 }, 2000);
+        currIndex = currIndex + 1;
+    }
+}
 
 
 
