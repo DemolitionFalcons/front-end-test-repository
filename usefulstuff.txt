@@ -1,0 +1,11 @@
+//animation to other coorrdinates
+tetronimo.attr(
+    {
+        stroke: 'none',
+        fill: 'blue'
+    }
+);
+ 
+tetronimo.animate({
+    path: "M 250 250 l 0 -50 l -50 0 l 0 -50 l -100 0 l 0 50 l 50 0 l 0 50 z"
+}, 5000, 'elastic');
