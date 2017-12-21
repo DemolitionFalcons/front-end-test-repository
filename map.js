@@ -298,58 +298,66 @@ var playerPath = [
 
     }
 })();
-var falcon = paper.image("falcon.png", playerPath[0].x - 30, playerPath[0].y - 90, 60, 100);
-var cloudy = paper.image("Cloudy-jhjj.gif.mp4", playerPath[14].x - 30, playerPath[14].y - 90, 300, 300);
+var falcon = paper.image("falcon.png", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
+var cloudy = paper.image("Cloudy-PIC.png", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170)
 
 
 var fly = paper.image("animated-eagle.gif", playerPath[0].x - 100, playerPath[0].y - 150, 200, 200);
+var skate = paper.image("Cloudy-jhjj.gif", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170);
+
 fly.hide();
-let button = document.getElementById('rollDice');
+skate.hide();
 
-
-button.addEventListener("click", function (event) {
-    rollDice(falcon, fly)
+let buttonFalcon = document.getElementById('moveFalcon');
+buttonFalcon.addEventListener("click", function (event) {
+    rollDiceFalcon(falcon, fly)
 });
-// button.addEventListener('click', (image) => {
-//    let num = 5
-//    console.log(image.x);
 
-//    console.log(image.index);
-
-
-//     image.animate({ x: playerPath[num].x - 30, y: playerPath[num].y - 90 }, 3000);
-// })
-let currIndex = 0;
-function rollDice(image, fly) {
+let currIndexFaclon = 0;
+function rollDiceFalcon(falcon, fly) {
     let num = Math.floor(Math.random() * 6) + 1
     console.log('Number: ' + num);
 
-    image.animate({y: playerPath[currIndex].y - 120, opacity: 0 }, 500, function () { this.hide() })
+    falcon.animate({ y: playerPath[currIndexFaclon].y - 120, opacity: 0 }, 500, function () { this.hide() })
     fly.show().animate({ opacity: 1 }, 500, function () {
-       
-        image.animate({ x: playerPath[currIndex + num].x - 30, y: playerPath[currIndex + num].y - 120 }, 2000);
-        //while(currIndex < currIndex + num){
-        fly.animate({ x: playerPath[currIndex + num].x - 100, y: playerPath[currIndex + num].y - 150 }, 3000, showImage);
-        // }
+
+        falcon.animate({ x: playerPath[currIndexFaclon + num].x - 50, y: playerPath[currIndexFaclon + num].y - 110 }, 2000);
+        fly.animate({ x: playerPath[currIndexFaclon + num].x - 100, y: playerPath[currIndexFaclon + num].y - 150 }, 3000, showImage);
     });
 
 
 
 
     function showImage() {
-        image.show().animate({y: playerPath[currIndex + num].y - 90,opacity: 1 }, 500);
+        falcon.show().animate({ y: playerPath[currIndexFaclon + num].y - 110, opacity: 1 }, 500);
 
         fly.animate({ opacity: 0 }, 500, function () { this.hide() })
 
-        currIndex = currIndex + num;
+        currIndexFaclon = currIndexFaclon + num;
         //currIndex = currIndex + 1;
     }
-    console.log('sadas');
+}
 
-    // let futureIndex = currIndex + num;
-    // while (currIndex < futureIndex) {
-    //     console.log(currIndex);
-    //     image.animate({ x: playerPath[currIndex + 1].x - 30, y: playerPath[currIndex + 1].y - 90 }, 2000);
-    //    setTimeout( () => {currIndex = currIndex + 1} , 2000);
-    // }
+
+let buttonCloudy = document.getElementById('moveCloudy');
+buttonCloudy.addEventListener("click", function (event) {
+    rollDiceCloudy(cloudy, skate)
+});
+
+let currIndexCloudy = 0;
+function rollDiceCloudy(cloudy, skate) {
+    let num = Math.floor(Math.random() * 6) + 1
+
+    cloudy.hide();
+    skate.show();
+    
+    cloudy.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
+    skate.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 3000, showImage);
+ 
+    function showImage() {
+        skate.hide();
+        cloudy.show();
+        currIndexCloudy = currIndexCloudy + num;
+        //currIndex = currIndex + 1;
+    }
 }
