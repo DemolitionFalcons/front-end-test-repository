@@ -299,8 +299,10 @@ var playerPath = [
     }
 })();
 var falcon = paper.image("falcon.png", playerPath[0].x - 30, playerPath[0].y - 90, 60, 100);
+var cloudy = paper.image("Cloudy-jhjj.gif.mp4", playerPath[14].x - 30, playerPath[14].y - 90, 300, 300);
 
-var fly = paper.image("animated-eagle.gif", playerPath[0].x-100, playerPath[0].y-150, 200, 200);
+
+var fly = paper.image("animated-eagle.gif", playerPath[0].x - 100, playerPath[0].y - 150, 200, 200);
 fly.hide();
 let button = document.getElementById('rollDice');
 
@@ -320,20 +322,30 @@ button.addEventListener("click", function (event) {
 let currIndex = 0;
 function rollDice(image, fly) {
     let num = Math.floor(Math.random() * 6) + 1
-    image.hide();
-    fly.show();
-    
-    image.animate({ x: playerPath[currIndex + num].x - 30, y: playerPath[currIndex + num].y - 90 }, 200 );
-    while(currIndex < currIndex + num){
-        fly.animate({ x: playerPath[currIndex + 1].x - 100, y: playerPath[currIndex + 1].y - 150 }, 3000);
-    }
-    function showImage(){
-        currIndex = currIndex + 1;
+    console.log('Number: ' + num);
+
+    image.animate({y: playerPath[currIndex].y - 120, opacity: 0 }, 500, function () { this.hide() })
+    fly.show().animate({ opacity: 1 }, 500, function () {
+       
+        image.animate({ x: playerPath[currIndex + num].x - 30, y: playerPath[currIndex + num].y - 120 }, 2000);
+        //while(currIndex < currIndex + num){
+        fly.animate({ x: playerPath[currIndex + num].x - 100, y: playerPath[currIndex + num].y - 150 }, 3000, showImage);
+        // }
+    });
+
+
+
+
+    function showImage() {
+        image.show().animate({y: playerPath[currIndex + num].y - 90,opacity: 1 }, 500);
+
+        fly.animate({ opacity: 0 }, 500, function () { this.hide() })
+
+        currIndex = currIndex + num;
+        //currIndex = currIndex + 1;
     }
     console.log('sadas');
-    image.show();
-    fly.hide();
-    currIndex = currIndex + num;
+
     // let futureIndex = currIndex + num;
     // while (currIndex < futureIndex) {
     //     console.log(currIndex);
