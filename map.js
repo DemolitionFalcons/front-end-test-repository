@@ -298,43 +298,103 @@ var playerPath = [
 
     }
 })();
+
+Raphael.el.isVisible = function () {
+    return (this.node.style.display !== "none");
+}
+
 var falcon = paper.image("falcon.png", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
+var falconLeft = paper.image("falcon-rotated.png", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
+falconLeft.hide()
 var cloudy = paper.image("Cloudy-PIC.png", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170)
 
 
 var fly = paper.image("animated-eagle.gif", playerPath[0].x - 100, playerPath[0].y - 150, 200, 200);
+var flyleft = paper.image("eagle-flying-left.gif", playerPath[0].x - 100, playerPath[0].y - 150, 200, 200);
+
 var skate = paper.image("Cloudy-jhjj.gif", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170);
 
 fly.hide();
+flyleft.hide();
 skate.hide();
 
 let buttonFalcon = document.getElementById('moveFalcon');
 buttonFalcon.addEventListener("click", function (event) {
-    rollDiceFalcon(falcon, fly)
+    rollDiceFalcon(falcon, fly, flyleft, falconLeft)
 });
 
 let currIndexFaclon = 0;
-function rollDiceFalcon(falcon, fly) {
+function rollDiceFalcon(falcon, fly, flyleft, falconLeft) {
     let num = Math.floor(Math.random() * 6) + 1
-    console.log('Number: ' + num);
+    if (falcon.isVisible) {
+        if (playerPath[currIndexFaclon + num].x < playerPath[currIndexFaclon].x) {
+            falcon.animate({ y: playerPath[currIndexFaclon].y - 120, opacity: 0 }, 500, function () { this.hide() })
 
-    falcon.animate({ y: playerPath[currIndexFaclon].y - 120, opacity: 0 }, 500, function () { this.hide() })
-    fly.show().animate({ opacity: 1 }, 500, function () {
+            flyleft.show().animate({ opacity: 1 }, 500, function () {
+                falcon.animate({ x: playerPath[currIndexFaclon + num].x - 50, y: playerPath[currIndexFaclon + num].y - 130 }, 2000);
+                falconLeft.animate({ x: playerPath[currIndexFaclon + num].x - 50, y: playerPath[currIndexFaclon + num].y - 130 }, 2000);
 
-        falcon.animate({ x: playerPath[currIndexFaclon + num].x - 50, y: playerPath[currIndexFaclon + num].y - 110 }, 2000);
-        fly.animate({ x: playerPath[currIndexFaclon + num].x - 100, y: playerPath[currIndexFaclon + num].y - 150 }, 3000, showImage);
-    });
+                fly.animate({ x: playerPath[currIndexFaclon + num].x - 100, y: playerPath[currIndexFaclon + num].y - 150 }, 2000)
+                flyleft.animate({ x: playerPath[currIndexFaclon + num].x - 100, y: playerPath[currIndexFaclon + num].y - 150 }, 3000, hideLeftFalcon);
+            });
+        } else {
+            falcon.animate({ y: playerPath[currIndexFaclon].y - 120, opacity: 0 }, 500, function () { this.hide() })
+            fly.show().animate({ opacity: 1 }, 500, function () {
+                falcon.animate({ x: playerPath[currIndexFaclon + num].x - 50, y: playerPath[currIndexFaclon + num].y - 130 }, 2000);
+                falconLeft.animate({ x: playerPath[currIndexFaclon + num].x - 50, y: playerPath[currIndexFaclon + num].y - 130 }, 2000);
+                flyleft.animate({ x: playerPath[currIndexFaclon + num].x - 100, y: playerPath[currIndexFaclon + num].y - 150 }, 2000)
+                fly.animate({ x: playerPath[currIndexFaclon + num].x - 100, y: playerPath[currIndexFaclon + num].y - 150 }, 3000, hideFalcon);
+            });
+        }
+    } else {
+        if (playerPath[currIndexFaclon + num].x < playerPath[currIndexFaclon].x) {
+            falconLeft.animate({ y: playerPath[currIndexFaclon].y - 120, opacity: 0 }, 500, function () { this.hide() })
+
+            flyleft.show().animate({ opacity: 1 }, 500, function () {
+                falconLeft.animate({ x: playerPath[currIndexFaclon + num].x - 50, y: playerPath[currIndexFaclon + num].y - 130 }, 2000);
+                falcon.animate({ x: playerPath[currIndexFaclon + num].x - 50, y: playerPath[currIndexFaclon + num].y - 130 }, 2000);
+
+                fly.animate({ x: playerPath[currIndexFaclon + num].x - 100, y: playerPath[currIndexFaclon + num].y - 150 }, 2000)
+                flyleft.animate({ x: playerPath[currIndexFaclon + num].x - 100, y: playerPath[currIndexFaclon + num].y - 150 }, 3000, hideLeftFalcon);
+            });
+        } else {
+            falconLeft.animate({ y: playerPath[currIndexFaclon].y - 120, opacity: 0 }, 500, function () { this.hide() })
+            fly.show().animate({ opacity: 1 }, 500, function () {
+                falconLeft.animate({ x: playerPath[currIndexFaclon + num].x - 50, y: playerPath[currIndexFaclon + num].y - 130 }, 2000);
+                falcon.animate({ x: playerPath[currIndexFaclon + num].x - 50, y: playerPath[currIndexFaclon + num].y - 130 }, 2000);
+                flyleft.animate({ x: playerPath[currIndexFaclon + num].x - 100, y: playerPath[currIndexFaclon + num].y - 150 }, 2000)
+                fly.animate({ x: playerPath[currIndexFaclon + num].x - 100, y: playerPath[currIndexFaclon + num].y - 150 }, 3000, hideFalcon);
+            });
+        }
+    }
 
 
+    function hideLeftFalcon() {
+        currIndexFaclon = currIndexFaclon + num;
+        if (playerPath[currIndexFaclon].x > playerPath[currIndexFaclon + 1].x) {
+            falconLeft.show().animate({ y: playerPath[currIndexFaclon].y - 110, opacity: 1 }, 500);
+            falcon.isVisible = false;
+        } else {
+            falcon.show().animate({ y: playerPath[currIndexFaclon].y - 110, opacity: 1 }, 500);
+            falcon.isVisible = true;
+        }
+
+        flyleft.animate({ opacity: 0 }, 500, function () { this.hide() })
 
 
-    function showImage() {
-        falcon.show().animate({ y: playerPath[currIndexFaclon + num].y - 110, opacity: 1 }, 500);
+    }
+    function hideFalcon() {
+        currIndexFaclon = currIndexFaclon + num;
 
+        if (playerPath[currIndexFaclon].x > playerPath[currIndexFaclon + 1].x) {
+            falconLeft.show().animate({ y: playerPath[currIndexFaclon].y - 110, opacity: 1 }, 500);
+            falcon.isVisible = false;
+        } else {
+            falcon.show().animate({ y: playerPath[currIndexFaclon].y - 110, opacity: 1 }, 500);
+            falcon.isVisible = true;
+        }
         fly.animate({ opacity: 0 }, 500, function () { this.hide() })
 
-        currIndexFaclon = currIndexFaclon + num;
-        //currIndex = currIndex + 1;
     }
 }
 
@@ -350,10 +410,10 @@ function rollDiceCloudy(cloudy, skate) {
 
     cloudy.hide();
     skate.show();
-    
+
     cloudy.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
     skate.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 3000, showImage);
- 
+
     function showImage() {
         skate.hide();
         cloudy.show();
