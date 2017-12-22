@@ -306,17 +306,23 @@ Raphael.el.isVisible = function () {
 var falcon = paper.image("falcon.png", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
 var falconLeft = paper.image("falcon-rotated.png", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
 falconLeft.hide()
-var cloudy = paper.image("Cloudy-PIC.png", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170)
+
+var cloudy = paper.image("Cloudy-PIC.png", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170);
+var cloudyLeft = paper.image("Cloudy-PIC-rotated.png", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170);
+cloudyLeft.hide();
 
 
 var fly = paper.image("animated-eagle.gif", playerPath[0].x - 100, playerPath[0].y - 150, 200, 200);
 var flyleft = paper.image("eagle-flying-left.gif", playerPath[0].x - 100, playerPath[0].y - 150, 200, 200);
 
 var skate = paper.image("Cloudy-jhjj.gif", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170);
+var skateLeft = paper.image("cloudy-flipped.gif", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170);
+
 
 fly.hide();
 flyleft.hide();
 skate.hide();
+skateLeft.hide();
 
 let buttonFalcon = document.getElementById('moveFalcon');
 buttonFalcon.addEventListener("click", function (event) {
@@ -401,23 +407,82 @@ function rollDiceFalcon(falcon, fly, flyleft, falconLeft) {
 
 let buttonCloudy = document.getElementById('moveCloudy');
 buttonCloudy.addEventListener("click", function (event) {
-    rollDiceCloudy(cloudy, skate)
+    rollDiceCloudy(cloudy, skate, cloudyLeft, skateLeft)
 });
 
 let currIndexCloudy = 0;
-function rollDiceCloudy(cloudy, skate) {
+function rollDiceCloudy(cloudy, skate, cloudyLeft, skateLeft) {
     let num = Math.floor(Math.random() * 6) + 1
 
-    cloudy.hide();
-    skate.show();
+    if (cloudy.isVisible) {
+        if (playerPath[currIndexCloudy + num].x < playerPath[currIndexCloudy].x) {
+            cloudy.hide();
 
-    cloudy.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
-    skate.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 3000, showImage);
+            skateLeft.show();
+            cloudy.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
+            cloudyLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
 
-    function showImage() {
-        skate.hide();
-        cloudy.show();
+            skate.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000)
+            skateLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 3000, hideLeftSkate);
+
+        } else {
+            cloudy.hide();
+            skate.show()
+            cloudy.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
+            cloudyLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
+            skateLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 2000)
+            skate.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 3000, hideSkate);
+
+        }
+    } else {
+        if (playerPath[currIndexCloudy + num].x < playerPath[currIndexCloudy].x) {
+            cloudyLeft.hide();
+
+            skateLeft.show();
+            cloudyLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
+            cloudy.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
+
+            skate.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000)
+            skateLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 3000, hideLeftSkate);
+
+        } else {
+            cloudyLeft.hide()
+            skate.show();
+            cloudyLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
+            cloudy.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
+            skateLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 2000)
+            skate.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 3000, hideSkate);
+
+        }
+    }
+
+
+    function hideLeftSkate() {
         currIndexCloudy = currIndexCloudy + num;
-        //currIndex = currIndex + 1;
+        skateLeft.hide();
+
+        if (playerPath[currIndexCloudy].x > playerPath[currIndexCloudy + 1].x) {
+            cloudyLeft.show();
+            cloudy.isVisible = false;
+        } else {
+            cloudy.show();
+            cloudy.isVisible = true;
+        }
+
+
+
+    }
+    function hideSkate() {
+        currIndexCloudy = currIndexCloudy + num;
+        skate.hide();
+
+        if (playerPath[currIndexCloudy].x > playerPath[currIndexCloudy + 1].x) {
+            cloudyLeft.show();
+            cloudy.isVisible = false;
+        } else {
+            cloudy.show();
+            cloudy.isVisible = true;
+        }
+
     }
 }
