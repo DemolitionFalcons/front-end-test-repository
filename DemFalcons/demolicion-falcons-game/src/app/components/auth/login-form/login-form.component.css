@@ -1,0 +1,27 @@
+.container{
+    width: 100%;
+    background: rgba(221, 140, 27, 0.7);
+    padding: 50px;
+    border-radius: 10px; 
+    color: white
+}
+
+
+.play-now{
+    background: url('/../assets/img/brown-ppt-background-5.jpg');
+    padding: 5px 30px 5px 30px;
+    color: white;
+    font-family: 'Chelsea Market';
+    font-size: 18pt;
+    border-radius: 10px;
+    border: none;
+    box-shadow:0px 0px 34px 3px rgba(0,0,0,0.52);
+    transition: all 0.5s;
+    outline: none;
+  }
+
+  .play-now:hover{
+    box-shadow: 0px 0px 109px 3px rgba(255,140,0,1);
+    filter: contrast(150%);
+    outline: none;
+  }

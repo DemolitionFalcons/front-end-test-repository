@@ -1,7 +1,13 @@
 <div class="wrapper">
   <div class="row">
     <div class="Absolute-Center is-Responsive">
-      <button class="start-game">PLAY GAME</button>
+      <button 
+      [style.display]="startBtnClicked ? 'none' : 'block'" 
+      (click)="goToLogin()" 
+      class="start-game">
+      PLAY GAME
+    </button>
+      <app-login-form [style.display]="startBtnClicked ? 'block' : 'none'" ></app-login-form>
     </div>
-  </div>  
+  </div>
 </div>

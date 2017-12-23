@@ -31,7 +31,7 @@
   .Absolute-Center {
     margin: auto;
     position: absolute;
-    top: 150px; left: 0; bottom: 0; right: 0;
+    top: 100px; left: 0; bottom: 0; right: 0;
   }
 
   .Absolute-Center.is-Responsive {
@@ -40,4 +40,8 @@
     min-width: 200px;
     max-width: 400px;
     padding: 40px;
+  }
+
+  app-login-form{
+    margin-top: -100px;
   }

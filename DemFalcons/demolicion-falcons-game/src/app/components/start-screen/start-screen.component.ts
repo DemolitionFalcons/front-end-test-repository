@@ -7,12 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartScreenComponent implements OnInit {
 
+  startBtnClicked: boolean;
   backgroungImgPath: String;
   constructor() {
     this.backgroungImgPath = '../../../assets/img/desert-canyon.jpg';
+    this.startBtnClicked = false;
   }
 
   ngOnInit() {
   }
 
+  goToLogin() { 
+    this.startBtnClicked = true;
+  }
 }
