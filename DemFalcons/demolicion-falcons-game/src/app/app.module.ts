@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { MapComponent } from './components/map/map.component';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginFormComponent } from './components/auth/login-form/login-form.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 
@@ -17,7 +18,8 @@ import { LoginFormComponent } from './components/auth/login-form/login-form.comp
     AppComponent,
     MapComponent,
     StartScreenComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -17,7 +17,7 @@ export class StartScreenComponent implements OnInit {
   ngOnInit() {
   }
 
-  goToLogin() { 
+  goToLogin() {
     this.startBtnClicked = true;
   }
 }
