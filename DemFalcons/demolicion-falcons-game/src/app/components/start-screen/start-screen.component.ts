@@ -7,17 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartScreenComponent implements OnInit {
 
-  startBtnClicked: boolean;
+  loginFormShow: boolean;
+  registerFormShow: boolean;
   backgroungImgPath: String;
+  logoPath: String;
   constructor() {
     this.backgroungImgPath = '../../../assets/img/desert-canyon.jpg';
-    this.startBtnClicked = false;
+    this.logoPath = '../../../assets/img/FirstLogo1TR.png';
+    this.loginFormShow = false;
+    this.registerFormShow = false;
   }
 
   ngOnInit() {
   }
 
   goToLogin() {
-    this.startBtnClicked = true;
+    this.loginFormShow = true;
+    this.registerFormShow = false;
+  }
+  goToRegister() {
+    this.registerFormShow = true;
+    this.loginFormShow = false;
   }
 }

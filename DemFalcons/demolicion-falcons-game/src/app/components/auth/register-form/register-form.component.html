@@ -1,0 +1,65 @@
+
+<div class="container">
+  <h2 class="title display-4" >Sign Up</h2>
+    <form (ngSubmit)="register()" #registerForm="ngForm">
+      <div class="form-group">
+        <input type="text" class="form-control" 
+        required
+        [(ngModel)]="model.username"
+        name="username"
+        #username="ngModel"
+        placeholder="Username">
+        <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+          Username is required!
+        </div>
+      </div>
+  
+  
+      <div class="form-group">
+        <input type="password" class="form-control"
+        required
+        [(ngModel)]="model.password"
+        name="password"
+        #password="ngModel"
+        placeholder="Password">
+        <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+          Password is required!
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <input type="text" class="form-control" 
+        required
+        [(ngModel)]="model.firstName"
+        name="firstName"
+        #firstName="ngModel"
+        placeholder="First Name">
+        <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
+          First Name is required!
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <input type="text" class="form-control" 
+        required
+        [(ngModel)]="model.lastName"
+        name="lastName"
+        #lastName="ngModel"
+        placeholder="Last Name">
+        <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
+          Last Name is required!
+        </div>
+      </div>
+
+      <span>You have account!</span><br><b class="login-span"(click)="goToLogin()">LOGIN NOW!</b>
+
+      <button class="play-now" [disabled]="!registerForm.form.valid" type="submit">Play now!</button>    
+    </form>
+    <div *ngIf="registerSuccess" class="alert alert-success">
+      Successfull Registered {{registeredUser}}!
+    </div>
+    <div *ngIf="registerFail" class="alert alert-danger">
+        User already exists!
+    </div>
+  </div>
+  

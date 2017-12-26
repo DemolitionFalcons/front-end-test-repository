@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LoginModel } from '../../../core/models/login.model';
 import { Router } from '@angular/router';
 
@@ -12,6 +12,7 @@ export class LoginFormComponent implements OnInit {
   public model: LoginModel;
   public loginFail: boolean;
   public username: string;
+  @Output() registerFormShow: EventEmitter<any> = new EventEmitter();
 
   constructor(private router: Router) {
     this.model = new LoginModel('', '');
@@ -26,4 +27,7 @@ export class LoginFormComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  goToRegister() {
+    this.registerFormShow.emit(true);
+  }
 }

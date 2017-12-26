@@ -1,13 +1,15 @@
 <div class="wrapper">
+  <div class="logo-div">
+    <img class="logo-img" src="{{logoPath}}" />
+  </div>
   <div class="row">
+
     <div class="Absolute-Center is-Responsive">
-      <button 
-      [style.display]="startBtnClicked ? 'none' : 'block'" 
-      (click)="goToLogin()" 
-      class="start-game">
-      PLAY GAME
-    </button>
-      <app-login-form [style.display]="startBtnClicked ? 'block' : 'none'" ></app-login-form>
+      <button [style.display]="loginFormShow || registerFormShow ? 'none' : 'block'" (click)="goToLogin()" class="start-game">
+        PLAY GAME
+      </button>
+      <app-login-form (registerFormShow)="goToRegister()" [style.display]="loginFormShow ? 'block' : 'none'"></app-login-form>
+      <app-register-form (loginFormShow)="goToLogin()" [style.display]="registerFormShow ? 'block' : 'none'"></app-register-form>
     </div>
   </div>
 </div>
