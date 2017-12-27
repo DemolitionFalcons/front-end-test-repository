@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LoginModel } from '../../../core/models/login.model';
 import { Router } from '@angular/router';
+import { NavBarService } from '../../../core/services/nav-bar.service';
 
 @Component({
   selector: 'app-login-form',
@@ -14,7 +15,7 @@ export class LoginFormComponent implements OnInit {
   public username: string;
   @Output() registerFormShow: EventEmitter<any> = new EventEmitter();
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private nav: NavBarService) {
     this.model = new LoginModel('', '');
     this.username = '';
   }
@@ -25,6 +26,8 @@ export class LoginFormComponent implements OnInit {
   login(): void {
     console.log('logedIn');
     this.router.navigate(['/home']);
+    localStorage.setItem('userName', this.model.username);
+    this.nav.show();
   }
 
   goToRegister() {

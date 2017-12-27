@@ -1,0 +1,7 @@
+.navbar{
+    background: url('/../assets/img/brown-ppt-background-5.jpg');
+    filter: contrast(120%);
+    margin: 5px 30px 5px 30px;
+    padding: 10px;
+    border-radius: 10px;
+}

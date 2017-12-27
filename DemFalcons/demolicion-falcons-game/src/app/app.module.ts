@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutesModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ServiceModule } from './core/services/services.module';
+import { HeroesModule } from './components/heroes/heroes.module';
 
 
 //Components
@@ -12,6 +13,8 @@ import { StartScreenComponent } from './components/start-screen/start-screen.com
 import { LoginFormComponent } from './components/auth/login-form/login-form.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterFormComponent } from './components/auth/register-form/register-form.component';
+import { HeaderComponent } from './components/shared/header/header.component';
+
 
 
 
@@ -23,13 +26,15 @@ import { RegisterFormComponent } from './components/auth/register-form/register-
     StartScreenComponent,
     LoginFormComponent,
     HomeComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutesModule,
     FormsModule,
-    ServiceModule
+    ServiceModule,
+    HeroesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

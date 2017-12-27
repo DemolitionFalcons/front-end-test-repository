@@ -53,7 +53,7 @@
 
       <span>You have account!</span><br><b class="login-span"(click)="goToLogin()">LOGIN NOW!</b>
 
-      <button class="play-now" [disabled]="!registerForm.form.valid" type="submit">Play now!</button>    
+      <button class="play-now" [hidden]="!registerForm.form.valid" type="submit">Play now!</button>    
     </form>
     <div *ngIf="registerSuccess" class="alert alert-success">
       Successfull Registered {{registeredUser}}!

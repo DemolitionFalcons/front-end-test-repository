@@ -9,7 +9,7 @@ export class StartScreenService {
         this.registerFormShow = false;
     }
 
-    goToRegisterForm(){
-        
+    goToRegisterForm() {
+
     }
 }
