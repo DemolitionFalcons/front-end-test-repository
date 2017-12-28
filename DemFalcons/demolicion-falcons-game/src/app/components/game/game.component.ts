@@ -39,6 +39,7 @@ export class GameComponent implements OnInit {
   private getPlayers(){
     //http for players
 
+    // offsetX и offsetY са за да може картинките на героя да се нареждат на различни места върхуквадратчето, а не да излизат една върху друга и да се закриват
     return {
       player1: {
         hero: 'cloudy',
