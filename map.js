@@ -278,6 +278,7 @@ var playerPath = [
         stoneIndex++;
 
     }
+
     function drawEvenLines() {
 
         while (xTwo <= 1106) {
@@ -303,20 +304,20 @@ Raphael.el.isVisible = function () {
     return (this.node.style.display !== "none");
 }
 
-var falcon = paper.image("falcon.png", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
-var falconLeft = paper.image("falcon-rotated.png", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
+var falcon = paper.image("heroes 250x222/eagle-right.png", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
+var falconLeft = paper.image("heroes 250x222/eagle-left.png", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
 falconLeft.hide()
 
-var cloudy = paper.image("Cloudy-PIC.png", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170);
-var cloudyLeft = paper.image("Cloudy-PIC-rotated.png", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170);
+var cloudy = paper.image("heroes 250x222/cloudy-right.png", playerPath[0].x, playerPath[0].y - 110, 60, 100);
+var cloudyLeft = paper.image("heroes 250x222/cloudy-left.png", playerPath[0].x , playerPath[0].y - 110, 60, 100);
 cloudyLeft.hide();
 
 
-var fly = paper.image("animated-eagle.gif", playerPath[0].x - 100, playerPath[0].y - 150, 200, 200);
-var flyleft = paper.image("eagle-flying-left.gif", playerPath[0].x - 100, playerPath[0].y - 150, 200, 200);
+var fly = paper.image("heroes 250x222/eagle-move-right.gif", playerPath[0].x - 100, playerPath[0].y - 150, 200, 200);
+var flyleft = paper.image("heroes 250x222/eagle-move-left.gif", playerPath[0].x - 100, playerPath[0].y - 150, 200, 200);
 
-var skate = paper.image("Cloudy-jhjj.gif", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170);
-var skateLeft = paper.image("cloudy-flipped.gif", playerPath[0].x - 30, playerPath[0].y - 140, 150, 170);
+var skate = paper.image("heroes 250x222/cloudy-move-right.gif", playerPath[0].x, playerPath[0].y - 110, 60, 100);
+var skateLeft = paper.image("heroes 250x222/cloudy-move-left.gif", playerPath[0].x, playerPath[0].y - 110, 60, 100);
 
 
 fly.hide();
@@ -419,19 +420,19 @@ function rollDiceCloudy(cloudy, skate, cloudyLeft, skateLeft) {
             cloudy.hide();
 
             skateLeft.show();
-            cloudy.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
-            cloudyLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
+            cloudy.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 2000);
+            cloudyLeft.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 2000);
 
-            skate.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000)
-            skateLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 3000, hideLeftSkate);
+            skate.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 2000)
+            skateLeft.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 3000, hideLeftSkate);
 
         } else {
             cloudy.hide();
             skate.show()
-            cloudy.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
-            cloudyLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
-            skateLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 2000)
-            skate.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 3000, hideSkate);
+            cloudy.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 2000);
+            cloudyLeft.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 2000);
+            skateLeft.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 2000)
+            skate.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 3000, hideSkate);
 
         }
     } else {
@@ -439,19 +440,19 @@ function rollDiceCloudy(cloudy, skate, cloudyLeft, skateLeft) {
             cloudyLeft.hide();
 
             skateLeft.show();
-            cloudyLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
-            cloudy.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
+            cloudyLeft.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 2000);
+            cloudy.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 2000);
 
-            skate.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000)
-            skateLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 3000, hideLeftSkate);
+            skate.animate({ x: playerPath[currIndexCloudy + num].x , y: playerPath[currIndexCloudy + num].y - 110 }, 2000)
+            skateLeft.animate({ x: playerPath[currIndexCloudy + num].x , y: playerPath[currIndexCloudy + num].y - 110 }, 3000, hideLeftSkate);
 
         } else {
             cloudyLeft.hide()
             skate.show();
-            cloudyLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
-            cloudy.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 2000);
-            skateLeft.animate({ x: playerPath[currIndexCloudy + num].x - 60, y: playerPath[currIndexCloudy + num].y - 140 }, 2000)
-            skate.animate({ x: playerPath[currIndexCloudy + num].x - 30, y: playerPath[currIndexCloudy + num].y - 140 }, 3000, hideSkate);
+            cloudyLeft.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 2000);
+            cloudy.animate({ x: playerPath[currIndexCloudy + num].x , y: playerPath[currIndexCloudy + num].y - 110 }, 2000);
+            skateLeft.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 2000)
+            skate.animate({ x: playerPath[currIndexCloudy + num].x, y: playerPath[currIndexCloudy + num].y - 110 }, 3000, hideSkate);
 
         }
     }

@@ -8,7 +8,7 @@ import { HeroesModule } from './components/heroes/heroes.module';
 
 //Components
 import { AppComponent } from './app.component';
-import { MapComponent } from './components/map/map.component';
+import { GameComponent } from './components/game/game.component';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginFormComponent } from './components/auth/login-form/login-form.component';
 import { HomeComponent } from './components/home/home.component';
@@ -22,7 +22,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent,
+    GameComponent,
     StartScreenComponent,
     LoginFormComponent,
     HomeComponent,
