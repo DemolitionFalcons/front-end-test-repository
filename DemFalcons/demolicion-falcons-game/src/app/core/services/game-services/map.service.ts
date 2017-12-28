@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import * as Raphael from 'raphael/raphael.js';
+import { PlayerService } from './player.service';
 
 @Injectable()
 export class MapService {
@@ -21,8 +22,11 @@ export class MapService {
     private mapObjects;
     private paper;
 
-    constructor() {
+    constructor(
+        private playerService: PlayerService
+    ) {
         this.stoneIndex = 0;
+        this.playerPath = this.playerService.getPlayerPath();
         this.mapObjects = this.getMapObjects();
         this.playerPath = this.getPlayerPath();
         this.xOne = 69;

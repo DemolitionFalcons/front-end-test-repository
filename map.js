@@ -313,8 +313,8 @@ var cloudyLeft = paper.image("heroes 250x222/cloudy-left.png", playerPath[0].x ,
 cloudyLeft.hide();
 
 
-var fly = paper.image("heroes 250x222/eagle-move-right.gif", playerPath[0].x - 100, playerPath[0].y - 150, 200, 200);
-var flyleft = paper.image("heroes 250x222/eagle-move-left.gif", playerPath[0].x - 100, playerPath[0].y - 150, 200, 200);
+var fly = paper.image("heroes 250x222/eagle-move-right.gif", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
+var flyleft = paper.image("heroes 250x222/eagle-move-left.gif", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
 
 var skate = paper.image("heroes 250x222/cloudy-move-right.gif", playerPath[0].x, playerPath[0].y - 110, 60, 100);
 var skateLeft = paper.image("heroes 250x222/cloudy-move-left.gif", playerPath[0].x, playerPath[0].y - 110, 60, 100);
