@@ -14,8 +14,7 @@ import { PlayerService } from '../../core/services/game-services/player.service'
 export class GameComponent implements OnInit {
 
   public paper;
-  public players;
-
+  public isDiceRolled = false;
   constructor(
     private mapService: MapService,
     private playerService: PlayerService
@@ -25,9 +24,8 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.players = this.getPlayers();
     this.mapService.drawMap(this.paper);
-    this.playerService.drawPlayers(this.paper, this.players);
+    this.playerService.drawPlayers(this.paper);
   }
 
   private setVisibleProperty(){
@@ -36,21 +34,15 @@ export class GameComponent implements OnInit {
     }
   }
 
-  private getPlayers(){
-    //http for players
-
-    // offsetX и offsetY са за да може картинките на героя да се нареждат на различни места върхуквадратчето, а не да излизат една върху друга и да се закриват
-    return {
-      player1: {
-        hero: 'cloudy',
-        offsetX: 50,
-        offsetY: 110
-      },
-      player2: {
-        hero: 'eagle',
-        offsetX: 0,
-        offsetY: 110
-      }
+  rollDice(){
+    console.log('in roll dice')
+    if(this.isDiceRolled === false){
+      this.isDiceRolled = true;
+      //request for dice?
+      this.playerService.movePlayer();
+      this.isDiceRolled = false;
+    }else {
+      return;
     }
   }
 

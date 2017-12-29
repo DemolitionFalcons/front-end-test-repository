@@ -6,38 +6,32 @@ import * as Raphael from 'raphael/raphael.js';
 @Injectable()
 export class PlayerService {
     private playerPath;
+    public players;
+    private currentPlayerIndex;
     constructor(
 
     ) {
+        this.players = this.getPlayers();
         this.playerPath = this.getPlayerPath();
     }
 
-    drawPlayers(paper, players) {
-        for(let p in players){
-            let player = players[p];
-            let imageRight = paper.image("../../../../assets/img/heroes/" + player.hero + '-right.png', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 60, 100);
+    drawPlayers(paper) {
+        for (let p in this.players) {
+            let player = this.players[p];
+            player.imageRight = paper.image("../../../../assets/img/heroes/" + player.hero + '-right.png', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 60, 100);
+            player.imageLeft = paper.image("../../../../assets/img/heroes/" + player.hero + '-left.png', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 60, 100);
+            player.moveRight = paper.image("../../../../assets/img/heroes/" + player.hero + '-move-right.gif', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 60, 100);
+            player.moveLeft = paper.image("../../../../assets/img/heroes/" + player.hero + '-move-left.gif', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 60, 100);
+
+            player.moveRight.hide();
+            player.moveLeft.hide();
+            player.imageLeft.hide();
         }
-        // var falcon = paper.image("heroes 250x222/eagle-right.png", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
-        // var falconLeft = paper.image("heroes 250x222/eagle-left.png", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
-        // falconLeft.hide()
-
-        // var cloudy = paper.image("heroes 250x222/cloudy-right.png", playerPath[0].x, playerPath[0].y - 110, 60, 100);
-        // var cloudyLeft = paper.image("heroes 250x222/cloudy-left.png", playerPath[0].x, playerPath[0].y - 110, 60, 100);
-        // cloudyLeft.hide();
 
 
-        // var fly = paper.image("heroes 250x222/eagle-move-right.gif", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
-        // var flyleft = paper.image("heroes 250x222/eagle-move-left.gif", playerPath[0].x - 50, playerPath[0].y - 110, 60, 100);
 
-        // var skate = paper.image("heroes 250x222/cloudy-move-right.gif", playerPath[0].x, playerPath[0].y - 110, 60, 100);
-        // var skateLeft = paper.image("heroes 250x222/cloudy-move-left.gif", playerPath[0].x, playerPath[0].y - 110, 60, 100);
-
-
-        // fly.hide();
-        // flyleft.hide();
-        // skate.hide();
-        // skateLeft.hide();
     }
+
     getPlayerPath(): Array<Object> {
         //http request
 
@@ -138,5 +132,115 @@ export class PlayerService {
         ];
 
         return playerPath;
+    }
+
+    movePlayer() {
+        let num = Math.floor(Math.random() * 6) + 1
+        let player = this.players[this.currentPlayerIndex];
+
+        if (player.imageRight.isVisible) {
+            if (this.playerPath[player.currentIndex + num].x < this.playerPath[player.currentIndex].x) {
+                player.imageRight.animate({ y: this.playerPath[player.currentIndex].y - 120, opacity: 0 }, 500, function () { this.hide() })
+
+                player.moveLeft.show().animate({ opacity: 1 }, 500, function () {
+                    player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - 50, y: this.playerPath[player.currentIndex + num].y - 130 }, 2000);
+                    player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - 50, y: this.playerPath[player.currentIndex + num].y - 130 }, 2000);
+
+                    player.moveRight.animate({ x: this.playerPath[player.currentIndex + num].x - 100, y: this.playerPath[player.currentIndex + num].y - 150 }, 2000)
+                    player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - 100, y: this.playerPath[player.currentIndex + num].y - 150 }, 3000, hideLeft);
+                });
+            } else {
+                player.imageRight.animate({ y: this.playerPath[player.currentIndex].y - 120, opacity: 0 }, 500, function () { this.hide() })
+                player.moveRight.show().animate({ opacity: 1 }, 500, function () {
+                    player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - 50, y: this.playerPath[player.currentIndex + num].y - 130 }, 2000);
+                    player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - 50, y: this.playerPath[player.currentIndex + num].y - 130 }, 2000);
+                    player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - 100, y: this.playerPath[player.currentIndex + num].y - 150 }, 2000)
+                    player.moveRight.animate({ x: this.playerPath[player.currentIndex + num].x - 100, y: this.playerPath[player.currentIndex + num].y - 150 }, 3000, hideRight);
+                });
+            }
+        } else {
+            if (this.playerPath[player.currentIndex + num].x < this.playerPath[player.currentIndex].x) {
+                player.imageLeft.animate({ y: this.playerPath[player.currentIndex].y - 120, opacity: 0 }, 500, function () { this.hide() })
+
+                player.moveLeft.show().animate({ opacity: 1 }, 500, function () {
+                    player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - 50, y: this.playerPath[player.currentIndex + num].y - 130 }, 2000);
+                    player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - 50, y: this.playerPath[player.currentIndex + num].y - 130 }, 2000);
+
+                    player.moveRight.animate({ x: this.playerPath[player.currentIndex + num].x - 100, y: this.playerPath[player.currentIndex + num].y - 150 }, 2000)
+                    player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - 100, y: this.playerPath[player.currentIndex + num].y - 150 }, 3000, hideLeft);
+                });
+            } else {
+                player.imageLeft.animate({ y: this.playerPath[player.currentIndex].y - 120, opacity: 0 }, 500, function () { this.hide() })
+                player.moveRight.show().animate({ opacity: 1 }, 500, function () {
+                    player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - 50, y: this.playerPath[player.currentIndex + num].y - 130 }, 2000);
+                    player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - 50, y: this.playerPath[player.currentIndex + num].y - 130 }, 2000);
+                    player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - 100, y: this.playerPath[player.currentIndex + num].y - 150 }, 2000)
+                    player.moveRight.animate({ x: this.playerPath[player.currentIndex + num].x - 100, y: this.playerPath[player.currentIndex + num].y - 150 }, 3000, hideRight);
+                });
+            }
+        }
+
+        function hideLeft() {
+            player.currentIndex = player.currentIndex + num;
+            if (this.playerPath[player.currentIndex].x > this.playerPath[player.currentIndex + 1].x) {
+                player.imageLeft.show().animate({ y: this.playerPath[player.currentIndex].y - 110, opacity: 1 }, 500);
+                player.imageRight.isVisible = false;
+            } else {
+                player.imageRight.show().animate({ y: this.playerPath[player.currentIndex].y - 110, opacity: 1 }, 500);
+                player.imageRight.isVisible = true;
+            }
+
+            player.moveLeft.animate({ opacity: 0 }, 500, function () {
+                this.hide();
+                //this.currentPlayerIndex = this.currentPlayerIndex % this.players.length;
+                if(this.currentPlayerIndex === this.players.length - 1){
+                    this.currentPlayerIndex = 0;
+                }else {
+                    this.currentPlayerIndex = this.currentPlayerIndex + 1;
+                }
+            })
+
+
+        }
+        function hideRight() {
+            player.currentIndex = player.currentIndex + num;
+
+            if (this.playerPath[player.currentIndex].x > this.playerPath[player.currentIndex + 1].x) {
+                player.imageLeft.show().animate({ y: this.playerPath[player.currentIndex].y - 110, opacity: 1 }, 500);
+                player.imageRight.isVisible = false;
+            } else {
+                player.imageRight.show().animate({ y: this.playerPath[player.currentIndex].y - 110, opacity: 1 }, 500);
+                player.imageRight.isVisible = true;
+            }
+            player.moveRight.animate({ opacity: 0 }, 500, function () {
+                this.hide();
+                //this.currentPlayerIndex = this.currentPlayerIndex % this.players.length;
+                if(this.currentPlayerIndex === this.players.length - 1){
+                    this.currentPlayerIndex = 0;
+                }else {
+                    this.currentPlayerIndex = this.currentPlayerIndex + 1;
+                }
+            })
+        }
+    }
+
+    private getPlayers() {
+        //http for players
+
+        // offsetX и offsetY са за да може картинките на героя да се нареждат на различни места върхуквадратчето, а не да излизат една върху друга и да се закриват
+        return {
+            player1: {
+                hero: 'cloudy',
+                currentIndex: 0,
+                offsetX: 50,
+                offsetY: 110
+            },
+            player2: {
+                hero: 'eagle',
+                currentIndex: 0,
+                offsetX: 0,
+                offsetY: 110
+            }
+        }
     }
 }

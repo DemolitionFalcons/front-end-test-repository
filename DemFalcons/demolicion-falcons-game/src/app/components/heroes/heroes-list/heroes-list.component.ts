@@ -14,14 +14,14 @@ export class HeroesListComponent implements OnInit {
       name: 'Falcon',
       hp: 400,
       armor: 10,
-      image: '../../../../assets/img/Heroes/Falcon.png',
+      image: '../../../../assets/img/heroes/eagle-right.png',
       description: 'It comes from a distant unknown land, it has a weak defense, but it is very quick and subtle'
     },
     {
       name: 'Cloudy',
       hp: 500,
       armor: 20,
-      image: '../../../../assets/img/Heroes/Cloudy.png',
+      image: '../../../../assets/img/heroes/cloudy-right.png',
       description: 'It comes from a Cloudysland,drives skate and has a strange hairstyle'
     }];
   }
