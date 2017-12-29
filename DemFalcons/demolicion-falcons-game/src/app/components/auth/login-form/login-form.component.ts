@@ -24,7 +24,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   login(): void {
-    console.log('logedIn');
+    console.log(this.model);
     this.router.navigate(['/home']);
     localStorage.setItem('userName', this.model.username);
     this.nav.show();

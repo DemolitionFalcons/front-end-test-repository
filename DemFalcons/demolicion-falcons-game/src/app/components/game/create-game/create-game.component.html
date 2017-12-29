@@ -1,0 +1,59 @@
+<div class="wrapper">
+  <div class="container">
+    {{model|json}}
+    <h2 class="title display-4">Create game</h2>
+    <form (ngSubmit)="createGame()" #createGameForm="ngForm">
+      <div class="form-group">
+        <input type="text" class="form-control" required [(ngModel)]="model.name" name="name" #name="ngModel" placeholder="Name of your game">
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          Username is required!
+        </div>
+      </div>
+      <div class="form-group">
+        <select name="cars" class="form-control" required [(ngModel)]="model.maxPlayers" name="maxPlayers" #maxPlayers="ngModel">
+          <option value="" disabled selected>Select max number of players</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="4">Four</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <div class="cc-selector">
+
+          <div class="map-container">
+            <h4 class="title display-4">Map1</h4>
+            <input id="map1" type="radio" name="map1" [(ngModel)]="model.map" #map="ngModel" value="map1" />
+            <label class="maps-style map1" for="map1"></label>
+          </div>
+
+          <div class="map-container">
+            <h4 class="title display-4">Map2</h4>
+            <input id="map2" type="radio" name="map2" [(ngModel)]="model.map" #map="ngModel" value="map2" />
+            <label class="maps-style map2" for="map2"></label>
+          </div>
+
+          <div class="map-container">
+            <h4 class="title display-4">Map3</h4>
+            <input id="map3" type="radio" name="map3" [(ngModel)]="model.map" #map="ngModel" value="map3" />
+            <label class="maps-style map3" for="map3"></label>
+          </div>
+
+        </div>
+      </div>
+      <br>
+      <br>
+
+      <button type="submit">Create your game now</button>
+    </form>
+  </div>
+  <br>
+  <br>  <br>
+  <br>  <br>
+  <br>  <br>
+  <br>  <br>
+  <br>
+  <br>  <br>
+  <br>  <br>
+  <br>
+  <footer>Footer</footer>
+</div>

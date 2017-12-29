@@ -8,12 +8,13 @@ import { HeroesModule } from './components/heroes/heroes.module';
 
 //Components
 import { AppComponent } from './app.component';
-import { GameComponent } from './components/game/game.component';
+import { GameComponent } from './components/game/gameplay/game.component';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginFormComponent } from './components/auth/login-form/login-form.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterFormComponent } from './components/auth/register-form/register-form.component';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { CreateGameComponent } from './components/game/create-game/create-game.component';
 
 
 
@@ -28,6 +29,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
     HomeComponent,
     RegisterFormComponent,
     HeaderComponent,
+    CreateGameComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { StartScreenService } from './start-screen.service';
 import { NavBarService } from "./nav-bar.service";
 import { MapService } from './game-services/map.service';
 import { PlayerService } from './game-services/player.service';
+import { CreateGameService } from "./game-services/create-game.service";
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { PlayerService } from './game-services/player.service';
         StartScreenService,
         NavBarService,
         MapService,
-        PlayerService
+        PlayerService,
+        CreateGameService
     ],
     imports: [
         CommonModule

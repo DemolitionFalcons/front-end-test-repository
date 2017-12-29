@@ -135,7 +135,7 @@ export class PlayerService {
     }
 
     movePlayer() {
-        let num = Math.floor(Math.random() * 6) + 1
+        let num = Math.floor(Math.random() * 6) + 1;
         let player = this.players[this.currentPlayerIndex];
 
         if (player.imageRight.isVisible) {
