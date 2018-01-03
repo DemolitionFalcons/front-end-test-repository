@@ -15,8 +15,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  createGame() {
-    console.log('create gameee');
-    this.router.navigate(['/createGame']);
+  singlePlayer() {
+    this.router.navigate(['/createSinglePlayer']);
   }
 }

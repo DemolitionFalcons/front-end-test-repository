@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterFormComponent } from './components/auth/register-form/register-form.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { CreateGameComponent } from './components/game/create-game/create-game.component';
+import { CreateSinglePlayerComponent } from './components/game/create-single-player/create-single-player.component';
 
 
 
@@ -30,6 +31,7 @@ import { CreateGameComponent } from './components/game/create-game/create-game.c
     RegisterFormComponent,
     HeaderComponent,
     CreateGameComponent,
+    CreateSinglePlayerComponent,
   ],
   imports: [
     BrowserModule,

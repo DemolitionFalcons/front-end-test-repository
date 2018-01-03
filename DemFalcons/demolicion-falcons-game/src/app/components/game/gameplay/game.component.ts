@@ -29,7 +29,8 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.paper.remove();
+
+    this.mapService.removePaper();
   }
 
   private setVisibleProperty() {

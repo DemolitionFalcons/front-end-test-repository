@@ -16,15 +16,15 @@ export class PlayerService {
         this.currentPlayerIndex = 0;
         this.movePlayer = this.movePlayer.bind(this);
         this.drawPlayers = this.drawPlayers.bind(this);
-        
+
     }
 
     drawPlayers(paper) {
         for (let player of this.players) {
-            player.imageRight = paper.image("../../../../assets/img/heroes/" + player.hero + '-right.png', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 60, 100);
-            player.imageLeft = paper.image("../../../../assets/img/heroes/" + player.hero + '-left.png', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 60, 100);
-            player.moveRight = paper.image("../../../../assets/img/heroes/" + player.hero + '-move-right.gif', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 60, 100);
-            player.moveLeft = paper.image("../../../../assets/img/heroes/" + player.hero + '-move-left.gif', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 60, 100);
+            player.imageRight = paper.image("../../../../assets/img/heroes/" + player.hero + '-right.png', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 100, 150);
+            player.imageLeft = paper.image("../../../../assets/img/heroes/" + player.hero + '-left.png', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 100, 150);
+            player.moveRight = paper.image("../../../../assets/img/heroes/" + player.hero + '-move-right.gif', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 100, 150);
+            player.moveLeft = paper.image("../../../../assets/img/heroes/" + player.hero + '-move-left.gif', this.playerPath[0].x - player.offsetX, this.playerPath[0].y - player.offsetY, 100, 150);
 
             player.moveRight.hide();
             player.moveLeft.hide();
@@ -143,8 +143,9 @@ export class PlayerService {
         console.log(this.playerPath[num])
         let player = this.players[this.currentPlayerIndex];
         if (player.imageRight.isVisible) {
+
             if (this.playerPath[player.currentIndex + num].x < this.playerPath[player.currentIndex].x) {
-                player.imageRight.animate({ y: this.playerPath[player.currentIndex].y - 120, opacity: 0 }, 500, function () { this.hide() })
+                player.imageRight.animate({ y: this.playerPath[player.currentIndex].y - player.offsetY - 20, opacity: 0 }, 500, function () { this.hide() })
 
                 player.moveLeft.show().animate({ opacity: 1 }, 500, () => {
                     player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
@@ -153,7 +154,7 @@ export class PlayerService {
                     player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 3000, hideLeft.bind(this));
                 });
             } else {
-                player.imageRight.animate({ y: this.playerPath[player.currentIndex].y - 120, opacity: 0 }, 500, function () { this.hide() })
+                player.imageRight.animate({ y: this.playerPath[player.currentIndex].y - player.offsetY - 20, opacity: 0 }, 500, function () { this.hide() })
                 player.moveRight.show().animate({ opacity: 1 }, 500, () => {
                     player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
@@ -163,17 +164,17 @@ export class PlayerService {
             }
         } else {
             if (this.playerPath[player.currentIndex + num].x < this.playerPath[player.currentIndex].x) {
-                player.imageLeft.animate({ y: this.playerPath[player.currentIndex].y - 120, opacity: 0 }, 500, function () { this.hide() })
+                player.imageLeft.animate({ y: this.playerPath[player.currentIndex].y - player.offsetY - 20, opacity: 0 }, 500, function () { this.hide() })
 
-                player.moveLeft.show().animate({ opacity: 1 }, 500,() =>{
+                player.moveLeft.show().animate({ opacity: 1 }, 500, () => {
                     player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
 
                     player.moveRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000)
-                    player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x -player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 3000, hideLeft.bind(this));
+                    player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 3000, hideLeft.bind(this));
                 });
             } else {
-                player.imageLeft.animate({ y: this.playerPath[player.currentIndex].y - 120, opacity: 0 }, 500, function () { this.hide() })
+                player.imageLeft.animate({ y: this.playerPath[player.currentIndex].y - player.offsetY - 20, opacity: 0 }, 500, function () { this.hide() })
                 player.moveRight.show().animate({ opacity: 1 }, 500, () => {
                     player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
@@ -184,10 +185,10 @@ export class PlayerService {
         }
 
         function hideLeft() {
-            console.log( 'player cur index: ' + player.currentIndex);
+            console.log('player cur index: ' + player.currentIndex);
             player.currentIndex = player.currentIndex + num;
-            console.log( 'player cur index again: ' + player.currentIndex)
-            
+            console.log('player cur index again: ' + player.currentIndex)
+
             if (this.playerPath[player.currentIndex].x > this.playerPath[player.currentIndex + 1].x) {
                 player.imageLeft.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
                 player.imageRight.isVisible = false;
@@ -196,7 +197,7 @@ export class PlayerService {
                 player.imageRight.isVisible = true;
             }
 
-            player.moveLeft.animate({ opacity: 0 }, 500,() => {
+            player.moveLeft.animate({ opacity: 0 }, 500, () => {
                 player.moveLeft.hide();
                 //this.currentPlayerIndex = this.currentPlayerIndex % this.players.length;
                 if (this.currentPlayerIndex === this.players.length - 1) {
@@ -209,10 +210,10 @@ export class PlayerService {
 
         }
         function hideRight() {
-            console.log( 'player cur index: ' + player.currentIndex);
+            console.log('player cur index: ' + player.currentIndex);
             player.currentIndex = player.currentIndex + num;
-            console.log( 'player cur index again: ' + player.currentIndex)
-            
+            console.log('player cur index again: ' + player.currentIndex)
+
             if (this.playerPath[player.currentIndex].x > this.playerPath[player.currentIndex + 1].x) {
                 player.imageLeft.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
                 player.imageRight.isVisible = false;
@@ -220,7 +221,7 @@ export class PlayerService {
                 player.imageRight.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
                 player.imageRight.isVisible = true;
             }
-            player.moveRight.animate({ opacity: 0 }, 500,() => {
+            player.moveRight.animate({ opacity: 0 }, 500, () => {
                 player.moveRight.hide();
                 //this.currentPlayerIndex = this.currentPlayerIndex % this.players.length;
                 if (this.currentPlayerIndex === this.players.length - 1) {
@@ -238,15 +239,26 @@ export class PlayerService {
         // offsetX и offsetY са за да може картинките на героя да се нареждат на различни места върхуквадратчето, а не да излизат една върху друга и да се закриват
         return [
             {
-                hero: 'cloudy',
-                currentIndex: 0,
-                offsetX: 50,
-                offsetY: 110
-            }, {
                 hero: 'eagle',
                 currentIndex: 0,
-                offsetX: 0,
-                offsetY: 110
+                offsetX: 50,
+                offsetY: 160
+            }, {
+                hero: 'edward',
+                currentIndex: 0,
+                offsetX: 5,
+                offsetY: 160
+            },
+            {
+                hero: 'cloudy',
+                currentIndex: 0,
+                offsetX: 35,
+                offsetY: 132
+            }, {
+                hero: 'stephano',
+                currentIndex: 0,
+                offsetX: -5,
+                offsetY: 130
             }
         ]
     }

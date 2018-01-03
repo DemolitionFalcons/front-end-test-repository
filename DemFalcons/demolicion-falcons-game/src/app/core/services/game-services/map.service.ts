@@ -33,7 +33,9 @@ export class MapService {
         this.y = [186, 143, 229]
         this.yIndex = 0;
     }
-
+    removePaper() {
+        this.paper.remove();
+    }
     drawMap(paper): void {
         this.paper = paper;
         for (let row = 0; row < 12; row++) {
@@ -179,7 +181,7 @@ export class MapService {
             y: 229,
             width: 300,
             height: 300
-        },{
+        }, {
             image: 'bridge.png',
             x: 200,
             y: 1050,
@@ -191,7 +193,7 @@ export class MapService {
         return objects;
     }
 
-    private drawMapObjects(){
+    private drawMapObjects() {
         for (const object of this.mapObjects) {
             this.paper.image("../../assets/img/map-objects/" + object.image, object.x, object.y, object.width, object.height);
         }
