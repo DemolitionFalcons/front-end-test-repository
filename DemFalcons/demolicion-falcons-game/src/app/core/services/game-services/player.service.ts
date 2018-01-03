@@ -151,15 +151,17 @@ export class PlayerService {
                     player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.moveRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000)
-                    player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 3000, hideLeft.bind(this));
+                    this.move(player, player.currentIndex + num, 'Left');
+                    
                 });
             } else {
                 player.imageRight.animate({ y: this.playerPath[player.currentIndex].y - player.offsetY - 20, opacity: 0 }, 500, function () { this.hide() })
+
                 player.moveRight.show().animate({ opacity: 1 }, 500, () => {
-                    player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
-                    player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
-                    player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000)
-                    player.moveRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 3000, hideRight.bind(this));
+                    player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 100);
+                    player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 100);
+                    player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 100)
+                    this.move(player, player.currentIndex + num, 'Right');
                 });
             }
         } else {
@@ -171,7 +173,7 @@ export class PlayerService {
                     player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
 
                     player.moveRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000)
-                    player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 3000, hideLeft.bind(this));
+                    this.move(player, player.currentIndex + num, 'Left');
                 });
             } else {
                 player.imageLeft.animate({ y: this.playerPath[player.currentIndex].y - player.offsetY - 20, opacity: 0 }, 500, function () { this.hide() })
@@ -179,58 +181,107 @@ export class PlayerService {
                     player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000)
-                    player.moveRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 3000, hideRight.bind(this));
+                    this.move(player, player.currentIndex + num, 'Right');
                 });
             }
         }
 
-        function hideLeft() {
-            console.log('player cur index: ' + player.currentIndex);
-            player.currentIndex = player.currentIndex + num;
-            console.log('player cur index again: ' + player.currentIndex)
-
-            if (this.playerPath[player.currentIndex].x > this.playerPath[player.currentIndex + 1].x) {
-                player.imageLeft.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
-                player.imageRight.isVisible = false;
-            } else {
-                player.imageRight.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
-                player.imageRight.isVisible = true;
-            }
-
-            player.moveLeft.animate({ opacity: 0 }, 500, () => {
-                player.moveLeft.hide();
-                //this.currentPlayerIndex = this.currentPlayerIndex % this.players.length;
-                if (this.currentPlayerIndex === this.players.length - 1) {
-                    this.currentPlayerIndex = 0;
-                } else {
-                    this.currentPlayerIndex = this.currentPlayerIndex + 1;
-                }
-            })
 
 
+       
+       
+    }
+
+    hideRight(player, end) {
+        player.currentIndex = end;
+
+        if (this.playerPath[player.currentIndex].x > this.playerPath[player.currentIndex + 1].x) {
+            player.imageLeft.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
+            player.imageRight.isVisible = false;
+        } else {
+            player.imageRight.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
+            player.imageRight.isVisible = true;
         }
-        function hideRight() {
-            console.log('player cur index: ' + player.currentIndex);
-            player.currentIndex = player.currentIndex + num;
-            console.log('player cur index again: ' + player.currentIndex)
-
-            if (this.playerPath[player.currentIndex].x > this.playerPath[player.currentIndex + 1].x) {
-                player.imageLeft.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
-                player.imageRight.isVisible = false;
+        player.moveRight.animate({ opacity: 0 }, 500, () => {
+            player.moveRight.hide();
+            //this.currentPlayerIndex = this.currentPlayerIndex % this.players.length;
+            if (this.currentPlayerIndex === this.players.length - 1) {
+                this.currentPlayerIndex = 0;
             } else {
-                player.imageRight.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
-                player.imageRight.isVisible = true;
+                this.currentPlayerIndex = this.currentPlayerIndex + 1;
             }
-            player.moveRight.animate({ opacity: 0 }, 500, () => {
-                player.moveRight.hide();
-                //this.currentPlayerIndex = this.currentPlayerIndex % this.players.length;
-                if (this.currentPlayerIndex === this.players.length - 1) {
-                    this.currentPlayerIndex = 0;
-                } else {
-                    this.currentPlayerIndex = this.currentPlayerIndex + 1;
-                }
-            })
+        })
+    }
+    
+    hideLeft(player, end) {
+        player.currentIndex = end;
+        if (this.playerPath[player.currentIndex].x > this.playerPath[player.currentIndex + 1].x) {
+            player.imageLeft.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
+            player.imageRight.isVisible = false;
+        } else {
+            player.imageRight.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
+            player.imageRight.isVisible = true;
         }
+
+        player.moveLeft.animate({ opacity: 0 }, 500, () => {
+            player.moveLeft.hide();
+            //this.currentPlayerIndex = this.currentPlayerIndex % this.players.length;
+            if (this.currentPlayerIndex === this.players.length - 1) {
+                this.currentPlayerIndex = 0;
+            } else {
+                this.currentPlayerIndex = this.currentPlayerIndex + 1;
+            }
+        })
+
+
+    }
+
+    move(player, end, direction) {
+        player['move'+direction].animate({ x: this.playerPath[player.currentIndex + 1].x - player.offsetX, y: this.playerPath[player.currentIndex + 1].y - player.offsetY }, 1000, () => {
+       
+            
+            if (player.currentIndex === end - 1) { 
+                if(direction === 'Right') {
+                    this.hideRight(player, end);
+                }else{
+                    this.hideLeft(player, end);
+                }
+                return;
+            } else {
+                player.currentIndex = player.currentIndex + 1;
+                return this.move(player, end, direction);
+            }
+        });
+        // if(direction === 'right'){
+        //     player.moveRight.animate({ x: this.playerPath[player.currentIndex + 1].x - player.offsetX, y: this.playerPath[player.currentIndex + 1].y - player.offsetY }, 1000, () => {
+        //         console.log('PLAYEER ' + player.currentIndex);
+        //         console.log('END - ' + end);
+                
+        //         if (player.currentIndex === end - 1) { 
+        //             console.log('PLAYER! = '+ player)  
+        //             this.hideRight(player, end);
+        //             return;
+        //         } else {
+        //             player.currentIndex = player.currentIndex + 1;
+        //             return this.move(player, end, direction);
+        //         }
+        //     });
+        // }else{
+        //     player.moveLeft.animate({ x: this.playerPath[player.currentIndex + 1].x - player.offsetX, y: this.playerPath[player.currentIndex + 1].y - player.offsetY }, 1000, () => {
+        //         console.log('PLAYEER ' + player.currentIndex);
+        //         console.log('END - ' + end);
+                
+        //         if (player.currentIndex === end - 1) { 
+        //             console.log('PLAYER! = '+ player)  
+        //             this.hideRight(player, end);
+        //             return;
+        //         } else {
+        //             player.currentIndex = player.currentIndex + 1;
+        //             return this.move(player, end, direction);
+        //         }
+        //     });
+        // }
+      
     }
 
     private getPlayers() {
