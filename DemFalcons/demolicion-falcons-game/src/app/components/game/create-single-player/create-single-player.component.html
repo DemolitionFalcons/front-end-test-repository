@@ -2,7 +2,7 @@
   <div class="container">
     {{model|json}}
     <h2 class="title display-4">Create game</h2>
-    <form (ngSubmit)="createGame()" #createGameForm="ngForm">
+    <form (ngSubmit)="createGame(createGameForm)" #createGameForm="ngForm">
       <div class="form-group">
         <input type="text" class="form-control" required [(ngModel)]="model.name" name="name" #name="ngModel" placeholder="Name of your game">
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
@@ -11,11 +11,19 @@
       </div>
       <div class="form-group">
         <label for="opponents">Number of opponents</label>
-        <select class="form-control" required [(ngModel)]="model.opponents" name="opponents" #opponents="ngModel" id="opponents">
+        <select required placeholder="Select number of opponents" (click)="updateOpps()" class="form-control" required [(ngModel)]="model.opponents" name="opponents" #opponents="ngModel" id="opponents">
           <option value="" disabled selected>Select number of opponents</option>
           <option value="1">one</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option  value="2">Two</option>
+          <option  value="3">Three</option>
+        </select>
+      </div>
+      <div>{{model.opponents}}</div>
+      <div *ngFor="let n of opponentsArr; let i = index">
+        <select required placeholder="Select number of opponents" class="form-control" [(ngModel)]="model.opp1" name="opp{{i}}" #opp{{i}}="ngModel" id="type">
+          <option value="" disabled selected>`Type of opponents</option>
+          <option value="computer">computer</option>
+          <option  value="human">human</option>
         </select>
       </div>
       <div class="form-group">
@@ -44,17 +52,23 @@
       <br>
       <br>
 
-      <button type="submit" routerLink="/play">Create your game now</button>
+      <button type="submit" >Create your game now</button>
     </form>
   </div>
   <br>
-  <br>  <br>
-  <br>  <br>
-  <br>  <br>
-  <br>  <br>
   <br>
-  <br>  <br>
-  <br>  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <br>
   <footer>Footer</footer>
 </div>

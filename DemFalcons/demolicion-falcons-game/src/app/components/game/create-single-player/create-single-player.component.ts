@@ -8,18 +8,30 @@ import { CreateSinglePlayersModel } from '../../../core/models/createSinglePlaye
   templateUrl: './create-single-player.component.html',
   styleUrls: ['./create-single-player.component.css']
 })
+
 export class CreateSinglePlayerComponent implements OnInit {
 
+  public opponents = 0;
   public model: CreateSinglePlayersModel;
+  public opponentsArr: Array<number>;
   constructor(private createGameService: CreateGameService) {
-    this.model = new CreateSinglePlayersModel('', '', 1);
+    this.model = new CreateSinglePlayersModel('', '', 0);
   }
 
   ngOnInit() {
+    console.log(this.model.opponents);
   }
 
-  createGame() {
-    this.createGameService.createGamePost(this.model);
+  updateOpps() {
+    console.log(this.opponentsArr);
+    this.opponentsArr = new Array(Number(this.model.opponents));
+
+  }
+
+  createGame(form) {
+    //this.createGameService.createGamePost(this.model);
+    console.log(form.value);
+
   }
 
 }
