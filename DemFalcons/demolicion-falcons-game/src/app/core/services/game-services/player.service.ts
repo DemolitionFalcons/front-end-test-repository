@@ -290,23 +290,23 @@ export class PlayerService {
         // offsetX и offsetY са за да може картинките на героя да се нареждат на различни места върхуквадратчето, а не да излизат една върху друга и да се закриват
         return [
             {
-                hero: 'eagle',
+                hero: 'edward',
                 currentIndex: 0,
                 offsetX: 50,
                 offsetY: 160
             }, {
-                hero: 'edward',
+                hero: 'stephano',
                 currentIndex: 0,
                 offsetX: 5,
                 offsetY: 160
             },
             {
-                hero: 'cloudy',
+                hero: 'eagle',
                 currentIndex: 0,
                 offsetX: 35,
                 offsetY: 132
             }, {
-                hero: 'stephano',
+                hero: 'cloudy',
                 currentIndex: 0,
                 offsetX: -5,
                 offsetY: 130

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeroeCardComponent } from './hero-card/heroe-card.component';
 import { HeroesListComponent } from './heroes-list/heroes-list.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -10,6 +11,7 @@ import { HeroesListComponent } from './heroes-list/heroes-list.component';
     ],
     imports: [
         CommonModule,
+        FormsModule
 
     ],
     exports: [

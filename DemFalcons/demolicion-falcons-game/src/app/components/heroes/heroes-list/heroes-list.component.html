@@ -1,4 +1,15 @@
-<div class="container">
-<app-heroe-card class="col" *ngFor="let hero of heroes" [hero]="hero">
-</app-heroe-card>
+<div class="wraper">
+
+
+    {{gameObject|json}}
+
+    <div class="row">
+        <form (ngSubmit)="submit(createGameForm)" #createGameForm="ngForm">
+            <div *ngFor="let p of playersArr; let i = index" class="player {{className}}">
+                <input type="text" class="form-control" required [(ngModel)]="gameObject[p].nickname" name="nickname{{i}}" #name="ngModel"
+                    placeholder="Name">
+            </div>
+        </form>
+    </div>
+
 </div>

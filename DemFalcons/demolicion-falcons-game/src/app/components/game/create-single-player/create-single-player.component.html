@@ -10,8 +10,8 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="opponents">Number of opponents</label>
-        <select required placeholder="Select number of opponents" (click)="updateOpps()" class="form-control" required [(ngModel)]="model.opponents" name="opponents" #opponents="ngModel" id="opponents">
+        <label for="numberOfOpponents">Number of opponents</label>
+        <select required placeholder="Select number of opponents" (click)="updateOpps()" class="form-control" required [(ngModel)]="model.numberOfOpponents" name="numberOfOpponents" #numberOfOpponents="ngModel" id="numberOfOpponents">
           <option value="" disabled selected>Select number of opponents</option>
           <option value="1">one</option>
           <option  value="2">Two</option>
@@ -20,7 +20,7 @@
       </div>
       <div>{{model.opponents}}</div>
       <div *ngFor="let n of opponentsArr; let i = index">
-        <select required placeholder="Select number of opponents" class="form-control" [(ngModel)]="model.opp1" name="opp{{i}}" #opp{{i}}="ngModel" id="type">
+        <select required placeholder="Select number of opponents" class="form-control" [ngModel]="player" name="player{{i + 2}}" #opp{{i}}="ngModel" id="type">
           <option value="" disabled selected>`Type of opponents</option>
           <option value="computer">computer</option>
           <option  value="human">human</option>

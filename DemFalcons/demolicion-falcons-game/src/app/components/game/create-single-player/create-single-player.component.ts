@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CreateGameService } from '../../../core/services/game-services/create-game.service';
 
 import { CreateSinglePlayersModel } from '../../../core/models/createSinglePlayer.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-single-player',
@@ -14,24 +15,42 @@ export class CreateSinglePlayerComponent implements OnInit {
   public opponents = 0;
   public model: CreateSinglePlayersModel;
   public opponentsArr: Array<number>;
-  constructor(private createGameService: CreateGameService) {
+  public maps: Array<number>;
+  constructor(
+    private createGameService: CreateGameService,
+    private router: Router
+  ) {
     this.model = new CreateSinglePlayersModel('', '', 0);
+    this.maps = new Array(3)
   }
 
   ngOnInit() {
-    console.log(this.model.opponents);
   }
 
   updateOpps() {
-    console.log(this.opponentsArr);
-    this.opponentsArr = new Array(Number(this.model.opponents));
-
+    this.opponentsArr = new Array(Number(this.model.numberOfOpponents));
   }
 
   createGame(form) {
     //this.createGameService.createGamePost(this.model);
-    console.log(form.value);
+    let gameObj = { map: this.model.map,
+       name: this.model.name, 
+       numberOfPlayers: Number(this.model.numberOfOpponents)+1,
+        'player1': {type: 'human',
+                  nickname: 'def',
+                  hero: 'def'
+                }
+           };
 
+    for (let key in form.value) {
+      if (key.startsWith('player')) {
+        gameObj[key] = {type: form.value[key], nickname: 'def', hero: 'def'}
+      }
+    }
+
+    this.createGameService.updateGameObject(gameObj);
+    this.router.navigate(['/ChooseHero'])
   }
+
 
 }
