@@ -18,6 +18,4 @@ export class CreateGameService {
     updateGameObject(data){
         this.gameObjectSource.next(data);
     }
-
-
 }

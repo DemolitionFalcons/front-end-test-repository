@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HeroModel } from '../../../core/models/hero.model';
 import { CreateGameService } from '../../../core/services/game-services/create-game.service';
+import { RemoteService } from '../../../core/services/remote.service';
+import { GameInitInfoService } from '../../../core/services/game-services/game-init-info.service';
 
 @Component({
   selector: 'app-heroes-list',
@@ -11,12 +13,14 @@ export class HeroesListComponent implements OnInit {
 
 
   public gameObject;
-  public heroes: HeroModel[]; 
+  public heroes: HeroModel[];
   public playersArr;
   public playersObj: {};
   public className: string;
   constructor(
-    private createGameService: CreateGameService
+    private createGameService: CreateGameService,
+    private remoteService: RemoteService,
+    private gameInitInfoService: GameInitInfoService
   ) {
     this.heroes = [{
       name: 'Falcon',
@@ -33,14 +37,14 @@ export class HeroesListComponent implements OnInit {
       description: 'It comes from a Cloudysland,drives skate and has a strange hairstyle'
     }];
 
-      this.createGameService.gameObgectRecieved$.subscribe(obj => {
-      this.gameObject = obj; 
+    this.createGameService.gameObgectRecieved$.subscribe(obj => {
+      this.gameObject = obj;
 
       console.log('OBJECTTTTT')
       console.log(obj)
       let playersObj = {}
-      for(let key in obj){
-        if(key.startsWith('player')){
+      for (let key in obj) {
+        if (key.startsWith('player')) {
           playersObj[key] = obj[key];
         }
       }
@@ -57,13 +61,16 @@ export class HeroesListComponent implements OnInit {
   }
 
   ngOnInit() {
-  
-
   }
 
-  submit(form){
+  sendGameObjectToServer() {
+    this.remoteService.sendGameObject(this.gameObject).subscribe(data => {
+      this.gameInitInfoService.updateGameInitialInfot(data);
+    })
+  }
+
+  submit(form) {
     console.log(this.gameObject)
     console.log(form.value)
   }
-
 }

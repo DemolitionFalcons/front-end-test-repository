@@ -30,9 +30,6 @@ export class PlayerService {
             player.moveLeft.hide();
             player.imageLeft.hide();
         }
-
-
-
     }
 
     getPlayerPath(): Array<Object> {
@@ -292,23 +289,23 @@ export class PlayerService {
             {
                 hero: 'edward',
                 currentIndex: 0,
-                offsetX: 50,
+                offsetX: 75,
                 offsetY: 160
             }, {
-                hero: 'stephano',
+                hero: 'cloudy',
                 currentIndex: 0,
-                offsetX: 5,
+                offsetX: 20,
                 offsetY: 160
             },
             {
                 hero: 'eagle',
                 currentIndex: 0,
-                offsetX: 35,
+                offsetX: 60,
                 offsetY: 132
             }, {
-                hero: 'cloudy',
+                hero: 'stephano',
                 currentIndex: 0,
-                offsetX: -5,
+                offsetX: 20,
                 offsetY: 130
             }
         ]

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as Raphael from 'raphael/raphael.js';
 import { MapService } from '../../../core/services/game-services/map.service';
 import { PlayerService } from '../../../core/services/game-services/player.service';
+import { DiceService } from '../../../core/services/game-services/dice.service';
 
 
 
@@ -17,7 +18,8 @@ export class GameComponent implements OnInit, OnDestroy {
   public isDiceRolled = false;
   constructor(
     private mapService: MapService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private diceService: DiceService
   ) {
     this.paper = Raphael('map', 100, 1500, 2000);
     this.setVisibleProperty();
@@ -26,6 +28,7 @@ export class GameComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.mapService.drawMap(this.paper);
     this.playerService.drawPlayers(this.paper);
+    this.diceService.drawDice(this.paper);
   }
 
   ngOnDestroy() {
@@ -40,6 +43,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   rollDice() {
+    this.diceService.rollDice();
     console.log('in roll dice');
     if (this.isDiceRolled === false) {
       this.isDiceRolled = true;
