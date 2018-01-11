@@ -17,50 +17,69 @@ export class HeroesListComponent implements OnInit {
   public playersArr;
   public playersObj: {};
   public className: string;
+  public heroesObjects;
   constructor(
     private createGameService: CreateGameService,
     private remoteService: RemoteService,
     private gameInitInfoService: GameInitInfoService
   ) {
+ 
     this.heroes = [{
       name: 'Falcon',
       hp: 400,
       armor: 10,
-      image: '../../../../assets/img/heroes/eagle-right.png',
+      image: '../../../../assets/img/heroes/hero-list/eagle.png',
       description: 'It comes from a distant unknown land, it has a weak defense, but it is very quick and subtle'
     },
     {
       name: 'Cloudy',
       hp: 500,
       armor: 20,
-      image: '../../../../assets/img/heroes/cloudy-right.png',
+      image: '../../../../assets/img/heroes/hero-list/cloudy.png',
+      description: 'It comes from a Cloudysland,drives skate and has a strange hairstyle'
+    },{
+      name: 'Edward',
+      hp: 500,
+      armor: 20,
+      image: '../../../../assets/img/heroes/hero-list/edward.png',
+      description: 'It comes from a Cloudysland,drives skate and has a strange hairstyle'
+    },{
+      name: 'Stephano',
+      hp: 500,
+      armor: 20,
+      image: '../../../../assets/img/heroes/hero-list/stephano.png',
       description: 'It comes from a Cloudysland,drives skate and has a strange hairstyle'
     }];
+
+    this.heroesObjects = {};
+    for(let hero of this.heroes){
+      this.heroesObjects[hero.name] = hero;
+    }
+
+    console.log('HEROES')
+    console.log(this.heroesObjects)
 
     this.createGameService.gameObgectRecieved$.subscribe(obj => {
       this.gameObject = obj;
 
-      console.log('OBJECTTTTT')
-      console.log(obj)
       let playersObj = {}
+
       for (let key in obj) {
         if (key.startsWith('player')) {
           playersObj[key] = obj[key];
         }
       }
+
       this.playersArr = Array.from(Object.keys(playersObj))
 
-      console.log('LPAYERRSSS')
-      console.log(this.playersArr)
       this.className = 'col-sm-' + 12 / this.gameObject.numberOfPlayers;
 
-      console.log('GAME OBJECT');
-      console.log(this.gameObject)
 
     })
   }
 
   ngOnInit() {
+
   }
 
   sendGameObjectToServer() {
@@ -73,4 +92,5 @@ export class HeroesListComponent implements OnInit {
     console.log(this.gameObject)
     console.log(form.value)
   }
+
 }

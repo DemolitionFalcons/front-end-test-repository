@@ -19,6 +19,9 @@ import { CreateSinglePlayerComponent } from './components/game/create-single-pla
 import { PreGameComponent } from './components/game/pre-game/pre-game.component';
 
 
+
+
+import { HttpClientModule } from '@angular/common/http'
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +40,8 @@ import { PreGameComponent } from './components/game/pre-game/pre-game.component'
     AppRoutesModule,
     FormsModule,
     ServiceModule,
-    HeroesModule
+    HeroesModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

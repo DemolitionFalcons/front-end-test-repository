@@ -45,14 +45,14 @@ export class GameComponent implements OnInit, OnDestroy {
   rollDice() {
     this.diceService.rollDice();
     console.log('in roll dice');
-    if (this.isDiceRolled === false) {
-      this.isDiceRolled = true;
-      //request for dice?
-      this.playerService.movePlayer();
-      this.isDiceRolled = false;
-    } else {
-      return;
-    }
+    // if (this.isDiceRolled === false) {
+    //   this.isDiceRolled = true;
+    //   //request for dice?
+    //   this.playerService.movePlayer();
+    //   this.isDiceRolled = false;
+    // } else {
+    //   return;
+    // }
   }
 
 }

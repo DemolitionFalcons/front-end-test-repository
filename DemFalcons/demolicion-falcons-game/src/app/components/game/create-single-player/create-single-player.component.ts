@@ -37,14 +37,14 @@ export class CreateSinglePlayerComponent implements OnInit {
        name: this.model.name, 
        numberOfPlayers: Number(this.model.numberOfOpponents)+1,
         'player1': {type: 'human',
-                  nickname: 'def',
-                  hero: 'def'
+                  nickname: '',
+                  hero: ''
                 }
            };
 
     for (let key in form.value) {
       if (key.startsWith('player')) {
-        gameObj[key] = {type: form.value[key], nickname: 'def', hero: 'def'}
+        gameObj[key] = {type: form.value[key], nickname: '', hero: ''}
       }
     }
 

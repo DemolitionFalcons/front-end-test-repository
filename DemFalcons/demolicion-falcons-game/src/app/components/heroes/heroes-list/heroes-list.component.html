@@ -1,15 +1,47 @@
-<div class="wraper">
+<div class="wrapper">
+    <div class="container">
 
 
-    {{gameObject|json}}
+        {{gameObject|json}}
 
-    <div class="row">
-        <form (ngSubmit)="submit(createGameForm)" #createGameForm="ngForm">
-            <div *ngFor="let p of playersArr; let i = index" class="player {{className}}">
-                <input type="text" class="form-control" required [(ngModel)]="gameObject[p].nickname" name="nickname{{i}}" #name="ngModel"
-                    placeholder="Name">
-            </div>
-        </form>
+        <div class="row">
+            <form (ngSubmit)="submit(createGameForm)" #createGameForm="ngForm">
+                <div *ngFor="let p of playersArr; let i = index" class="player {{className}}">
+                    <input type="text" class="form-control" required [(ngModel)]="gameObject[p].nickname" name="nickname{{i}}" #name="ngModel"
+                        placeholder="Name" />
+                      
+
+                    <!-- <div *ngIf="gameObject[p].hero">
+                        <img src="{{heroesObjects[gameObject[p].hero].image}}" alt="" />
+                        <h1>{{gameObject[p].hero}}</h1>
+                        <div class="hero-details">
+                            <h4>
+                                <span>Health: </span>12</h4>
+                            <h4>
+                                <span>Armor: </span>12</h4>
+                            <p>
+                                <span>Description: </span>sdfssf</p>
+                        </div>
+                    </div> -->
+
+                    <app-heroe-card *ngIf="gameObject[p].hero" [hero]="heroesObjects[gameObject[p].hero]"></app-heroe-card>
+
+                    <div class="form-group">
+                        <div class="cc-selector">
+                            <div class="row">
+
+                                <div *ngFor="let hero of heroes; let j = index" class="map-container col-sm-3">
+                                    <input id="hero{{j}}{{i}}" type="radio" name="hero1{{i}}" [(ngModel)]="gameObject[p].hero" #hero1="ngModel" value="{{hero.name}}"
+                                    />
+                                    <label class="maps-style" for="hero{{j}}{{i}}">
+                                        <img src="{{hero.image}}" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-
 </div>

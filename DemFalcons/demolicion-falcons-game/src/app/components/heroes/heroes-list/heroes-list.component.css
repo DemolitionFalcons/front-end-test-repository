@@ -8,5 +8,80 @@
     border:2px solid red !important; 
 }
 
+.wrapper {
+    background: url('/../assets/img/desert-canyon-2.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+
+    text-align: center;
+    margin-top: -80px;
+    padding-top: 80px;
+  }
+
+  .container{
+    background: wheat;
+    width: 100% !important;
+  }
 
 
+
+
+
+
+
+  .cc-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+  }
+
+/* .eagle{background-image:url('/../assets/img/heroes/hero-list/eagle.png');
+background-size: contain;
+background-repeat: no-repeat;}
+.cloudy{background-image:url('/../assets/img/heroes/hero-list/cloudy.png');
+    background-size: contain;
+    background-repeat: no-repeat;}
+.edward{background-image:url('/../assets/img/heroes/hero-list/edward.png');}
+.stephano{background-image:url('/../assets/img/heroes/hero-list/stephano.png');} */
+
+.cc-selector input:active +.maps-style{opacity: .9;}
+.cc-selector input:checked +.maps-style{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+
+.maps-style{
+    cursor:pointer;
+    display:inline-block;
+    border: 1px solid red;
+    width: 170px; 
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+
+img{
+    width: 100%;
+}
+.maps-style:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+/* Extras */
+a:visited{color:#888}
+a{color:#444;text-decoration:none;}
+p{margin-bottom:.3em;}
+
+.map-container{
+  display: inline-block;
+}

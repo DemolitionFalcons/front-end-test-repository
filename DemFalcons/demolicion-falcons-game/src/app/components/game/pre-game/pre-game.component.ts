@@ -13,9 +13,11 @@ export class PreGameComponent implements OnInit {
   constructor(
     private gameInitInfoService: GameInitInfoService
   ) {
+    
     this.gameInitInfoService.gameInitialInfoRecieved$.subscribe(data => {
       this.gameInfo = data;
     })
+
    }
 
   ngOnInit() {

@@ -7,8 +7,10 @@ import { HttpClient } from '@angular/common/http'
 
 @Injectable()
 export class GameInitInfoService {
+
     private gameInitialInfoSource = new BehaviorSubject<any>({});
     public gameInitialInfoRecieved$ = this.gameInitialInfoSource.asObservable();
+
 
     constructor(
     ) { }
@@ -16,6 +18,7 @@ export class GameInitInfoService {
     updateGameInitialInfot(data){
         this.gameInitialInfoSource.next(data);
     }
+
 }
 
 
