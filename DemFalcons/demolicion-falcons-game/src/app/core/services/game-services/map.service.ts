@@ -20,7 +20,6 @@ export class MapService {
         { x: 819, y: 1304 },
     ];
     private mapObjects;
-    private paper;
 
     constructor(
         private playerService: PlayerService
@@ -33,14 +32,11 @@ export class MapService {
         this.y = [186, 143, 229]
         this.yIndex = 0;
     }
-    removePaper() {
-        this.paper.remove();
-    }
+   
     drawMap(paper): void {
-        this.paper = paper;
         for (let row = 0; row < 12; row++) {
             if (row % 2 == 0) {
-                this.drawEvenLines();
+                this.drawEvenLines(paper);
                 this.xOne = 144;
                 this.xTwo = 69
                 let y0 = this.y[0] + 129;
@@ -48,7 +44,7 @@ export class MapService {
                 let y2 = this.y[2] + 129
                 this.y = [y0, y1, y2];
             } else {
-                this.drawOddLines()
+                this.drawOddLines(paper)
                 this.xOne = 69;
                 this.xTwo = 144;
                 let y0 = this.y[0] + 129;
@@ -59,7 +55,7 @@ export class MapService {
 
         }
 
-        this.drawMapObjects();
+        this.drawMapObjects(paper);
     }
 
     private NGon(x, y, N, side) {
@@ -80,9 +76,9 @@ export class MapService {
         return path;
     }
 
-    private drawOddLines() {
+    private drawOddLines(paper) {
         while (this.xOne <= 1106) {
-            this.drawLine();
+            this.drawLine(paper);
 
             this.yIndex = 0;
             this.xOne += 150;
@@ -90,17 +86,17 @@ export class MapService {
         }
     }
 
-    private drawEvenLines() {
+    private drawEvenLines(paper) {
 
         while (this.xTwo <= 1106) {
-            this.drawLine();
+            this.drawLine(paper);
             this.yIndex = 0;
             this.xOne += 150;
             this.xTwo += 150;
         }
     }
 
-    private drawLine() {
+    private drawLine(paper) {
         let fill = '';
         let elText = '';
         fill = this.playerPath.filter(e => e.x === this.xOne && e.y === this.y[this.yIndex]).length > 0 ? 'stone' : 'url(../../assets/img/grass.png)'
@@ -111,17 +107,17 @@ export class MapService {
 
         this.yIndex = 0;
         if (fill === 'stone') {
-            this.paper.path(this.NGon(this.xOne, this.y[this.yIndex], 6, 50)).attr({
+            paper.path(this.NGon(this.xOne, this.y[this.yIndex], 6, 50)).attr({
                 fill: 'url(../../assets/img/grass.png)',
                 stroke: '#000000',
                 text: elText,
                 'stroke-width': '0',
                 'stroke-opacity': '0',
             });
-            this.drawStone(this.xOne);
+            this.drawStone(this.xOne,paper);
 
         } else {
-            this.paper.path(this.NGon(this.xOne, this.y[this.yIndex], 6, 50)).attr({
+            paper.path(this.NGon(this.xOne, this.y[this.yIndex], 6, 50)).attr({
                 fill: fill,
                 stroke: '#000000',
                 'stroke-width': '0',
@@ -130,7 +126,7 @@ export class MapService {
         }
 
 
-        elText = this.paper.text(this.xOne, this.y[this.yIndex], this.xOne + ':' + this.y[this.yIndex]).attr({ opacity: 2, 'font-size': 12 }).toFront();;
+        elText = paper.text(this.xOne, this.y[this.yIndex], this.xOne + ':' + this.y[this.yIndex]).attr({ opacity: 2, 'font-size': 12 }).toFront();;
         // elText.attr({ opacity: 2, 'font-size': 12 }).toFront();
 
 
@@ -142,17 +138,17 @@ export class MapService {
                 fill = '#EF3D39';
             }
             if (fill === 'stone') {
-                this.paper.path(this.NGon(this.xTwo, this.y[this.yIndex], 6, 50)).attr({
+                paper.path(this.NGon(this.xTwo, this.y[this.yIndex], 6, 50)).attr({
                     fill: 'url(../../assets/img/grass.png)',
                     stroke: '#000000',
                     text: elText,
                     'stroke-width': '0',
                     'stroke-opacity': '0'
                 });
-                this.drawStone(this.xTwo);
+                this.drawStone(this.xTwo,paper);
 
             } else {
-                this.paper.path(this.NGon(this.xTwo, this.y[this.yIndex], 6, 50)).attr({
+                paper.path(this.NGon(this.xTwo, this.y[this.yIndex], 6, 50)).attr({
                     fill: fill,
                     stroke: '#000000',
                     'stroke-width': '0',
@@ -160,7 +156,7 @@ export class MapService {
                 });
             }
 
-            elText = this.paper.text(this.xTwo, this.y[this.yIndex], this.xTwo + ':' + this.y[this.yIndex]).attr({ opacity: 2, 'font-size': 12 }).toFront();
+            elText = paper.text(this.xTwo, this.y[this.yIndex], this.xTwo + ':' + this.y[this.yIndex]).attr({ opacity: 2, 'font-size': 12 }).toFront();
 
 
             this.yIndex = 2;
@@ -169,8 +165,8 @@ export class MapService {
 
     }
 
-    private drawStone(x) {
-        this.paper.image("../../assets/img/stone-path.png", x - 50, this.y[this.yIndex] - 50, 100, 100);
+    private drawStone(x,paper) {
+        paper.image("../../assets/img/stone-path.png", x - 50, this.y[this.yIndex] - 50, 100, 100);
     }
 
     private getMapObjects(): Array<Object> {
@@ -193,9 +189,9 @@ export class MapService {
         return objects;
     }
 
-    private drawMapObjects() {
+    private drawMapObjects(paper) {
         for (const object of this.mapObjects) {
-            this.paper.image("../../assets/img/map-objects/" + object.image, object.x, object.y, object.width, object.height);
+          paper.image("../../assets/img/map-objects/" + object.image, object.x, object.y, object.width, object.height);
         }
     }
 }

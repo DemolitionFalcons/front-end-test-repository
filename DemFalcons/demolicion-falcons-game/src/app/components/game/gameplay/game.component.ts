@@ -21,9 +21,16 @@ export class GameComponent implements OnInit, OnDestroy {
     private playerService: PlayerService,
     private diceService: DiceService
   ) {
-    this.paper = Raphael('map', 100, 1300, 2000)
+
+    var width = window.document.body.clientWidth
+
+    this.paper = Raphael('map', 50, '100%', '250%')
+    this.paper.setViewBox(0, 0, width, 2000, true);
+    this.paper.canvas.setAttribute('preserveAspectRatio', 'none');
+   
     this.setVisibleProperty();
   }
+
 
   ngOnInit() {
     this.mapService.drawMap(this.paper);
@@ -33,7 +40,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
 
-    this.mapService.removePaper();
+    // this.mapService.removePaper();
   }
 
   private setVisibleProperty() {
