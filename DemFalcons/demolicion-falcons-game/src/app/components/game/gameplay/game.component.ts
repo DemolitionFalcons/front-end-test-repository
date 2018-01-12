@@ -24,10 +24,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
     var width = window.document.body.clientWidth
 
-    this.paper = Raphael('map', 50, '100%', '250%')
-    this.paper.setViewBox(0, 0, width, 2000, true);
+    this.paper = Raphael('map', 50, '90%', '250%')
+    this.paper.setViewBox(0, 0, width, 1700, true);
     this.paper.canvas.setAttribute('preserveAspectRatio', 'none');
-   
+    this.paper.image("../../../../assets/img/map1background.jpg", 0, 20, '80%', 1700);
     this.setVisibleProperty();
   }
 

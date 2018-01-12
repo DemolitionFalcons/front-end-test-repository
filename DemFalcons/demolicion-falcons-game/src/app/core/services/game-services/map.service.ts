@@ -101,32 +101,32 @@ export class MapService {
         let elText = '';
         fill = this.playerPath.filter(e => e.x === this.xOne && e.y === this.y[this.yIndex]).length > 0 ? 'stone' : 'url(../../assets/img/grass.png)'
         if (this.blackHoles.filter(e => e.x === this.xOne && e.y === this.y[this.yIndex]).length > 0) {
-            fill = '#EF3D39';
+            // fill = '#EF3D39';
         }
 
 
         this.yIndex = 0;
         if (fill === 'stone') {
-            paper.path(this.NGon(this.xOne, this.y[this.yIndex], 6, 50)).attr({
-                fill: 'url(../../assets/img/grass.png)',
-                stroke: '#000000',
-                text: elText,
-                'stroke-width': '0',
-                'stroke-opacity': '0',
-            });
+            // paper.path(this.NGon(this.xOne, this.y[this.yIndex], 6, 50)).attr({
+            //     // fill: 'url(../../assets/img/grass.png)',
+            //     stroke: '#000000',
+            //     // text: elText,
+            //     'stroke-width': '0',
+            //     'stroke-opacity': '0',
+            // });
             this.drawStone(this.xOne,paper);
 
         } else {
-            paper.path(this.NGon(this.xOne, this.y[this.yIndex], 6, 50)).attr({
-                fill: fill,
-                stroke: '#000000',
-                'stroke-width': '0',
-                'stroke-opacity': '0'
-            });
+            // paper.path(this.NGon(this.xOne, this.y[this.yIndex], 6, 50)).attr({
+            //     // fill: fill,
+            //     stroke: '#000000',
+            //     'stroke-width': '0',
+            //     'stroke-opacity': '0'
+            // });
         }
 
 
-        elText = paper.text(this.xOne, this.y[this.yIndex], this.xOne + ':' + this.y[this.yIndex]).attr({ opacity: 2, 'font-size': 12 }).toFront();;
+        // elText = this.paper.text(this.xOne, this.y[this.yIndex], this.xOne + ':' + this.y[this.yIndex]).attr({ opacity: 2, 'font-size': 12 }).toFront();;
         // elText.attr({ opacity: 2, 'font-size': 12 }).toFront();
 
 
@@ -135,28 +135,28 @@ export class MapService {
         for (let index = 0; index < 2; index++) {
             fill = this.playerPath.filter(e => e.x === this.xTwo && e.y === this.y[this.yIndex]).length > 0 ? 'stone' : 'url(../../assets/img/grass.png)'
             if (this.blackHoles.filter(e => e.x === this.xTwo && e.y === this.y[this.yIndex]).length > 0) {
-                fill = '#EF3D39';
+                // fill = '#EF3D39';
             }
             if (fill === 'stone') {
-                paper.path(this.NGon(this.xTwo, this.y[this.yIndex], 6, 50)).attr({
-                    fill: 'url(../../assets/img/grass.png)',
-                    stroke: '#000000',
-                    text: elText,
-                    'stroke-width': '0',
-                    'stroke-opacity': '0'
-                });
+                // paper.path(this.NGon(this.xTwo, this.y[this.yIndex], 6, 50)).attr({
+                //     // fill: 'url(../../assets/img/grass.png)',
+                //     stroke: '#000000',
+                //     // text: elText,
+                //     'stroke-width': '0',
+                //     'stroke-opacity': '0'
+                // });
                 this.drawStone(this.xTwo,paper);
 
             } else {
-                paper.path(this.NGon(this.xTwo, this.y[this.yIndex], 6, 50)).attr({
-                    fill: fill,
-                    stroke: '#000000',
-                    'stroke-width': '0',
-                    'stroke-opacity': '0'
-                });
+                // paper.path(this.NGon(this.xTwo, this.y[this.yIndex], 6, 50)).attr({
+                //     // fill: fill,
+                //     stroke: '#000000',
+                //     'stroke-width': '0',
+                //     'stroke-opacity': '0'
+                // });
             }
 
-            elText = paper.text(this.xTwo, this.y[this.yIndex], this.xTwo + ':' + this.y[this.yIndex]).attr({ opacity: 2, 'font-size': 12 }).toFront();
+            // elText = this.paper.text(this.xTwo, this.y[this.yIndex], this.xTwo + ':' + this.y[this.yIndex]).attr({ opacity: 2, 'font-size': 12 }).toFront();
 
 
             this.yIndex = 2;
@@ -171,19 +171,20 @@ export class MapService {
 
     private getMapObjects(): Array<Object> {
         //http request for array with objects for trees, ala bala kvoto ima
-        let objects = [{
-            image: 'trees2.png',
-            x: 135,
-            y: 229,
-            width: 300,
-            height: 300
-        }, {
-            image: 'bridge.png',
-            x: 200,
-            y: 1050,
-            width: 270,
-            height: 270
-        }
+        let objects = [
+            // {
+            //     image: 'trees2.png',
+            //     x: 135,
+            //     y: 229,
+            //     width: 300,
+            //     height: 300
+            // }, {
+            //     image: 'bridge.png',
+            //     x: 200,
+            //     y: 1050,
+            //     width: 270,
+            //     height: 270
+            // }
         ];
 
         return objects;
