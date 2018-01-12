@@ -116,7 +116,7 @@ export class MapService {
                 stroke: '#000000',
                 text: elText,
                 'stroke-width': '0',
-                'stroke-opacity': '0'
+                'stroke-opacity': '0',
             });
             this.drawStone(this.xOne);
 

@@ -21,7 +21,7 @@ export class GameComponent implements OnInit, OnDestroy {
     private playerService: PlayerService,
     private diceService: DiceService
   ) {
-    this.paper = Raphael('map', 100, 1500, 2000);
+    this.paper = Raphael('map', 100, 1300, 2000)
     this.setVisibleProperty();
   }
 
