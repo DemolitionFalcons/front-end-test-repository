@@ -147,7 +147,7 @@ export class PlayerService {
                     player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.moveRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000)
-                    this.move(player, player.currentIndex + num, 'Left');               
+                    this.move(player, player.currentIndex + num, 'Left');
                 });
             } else {
                 player.imageRight.animate({ y: this.playerPath[player.currentIndex].y - player.offsetY - 20, opacity: 0 }, 500, function () { this.hide() })
@@ -157,6 +157,7 @@ export class PlayerService {
                     player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 100);
                     player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 100)
                     this.move(player, player.currentIndex + num, 'Right');
+
                 });
             }
         } else {
@@ -183,13 +184,12 @@ export class PlayerService {
 
 
 
-       
-       
+
+
     }
 
     hideRight(player, end) {
         player.currentIndex = end;
-
         if (this.playerPath[player.currentIndex].x > this.playerPath[player.currentIndex + 1].x) {
             player.imageLeft.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
             player.imageRight.isVisible = false;
@@ -207,7 +207,7 @@ export class PlayerService {
             }
         })
     }
-    
+
     hideLeft(player, end) {
         player.currentIndex = end;
         if (this.playerPath[player.currentIndex].x > this.playerPath[player.currentIndex + 1].x) {
@@ -232,13 +232,13 @@ export class PlayerService {
     }
 
     move(player, end, direction) {
-        player['move'+direction].animate({ x: this.playerPath[player.currentIndex + 1].x - player.offsetX, y: this.playerPath[player.currentIndex + 1].y - player.offsetY }, 1000, () => {
-       
-            
-            if (player.currentIndex === end - 1) { 
-                if(direction === 'Right') {
+        player['move' + direction].animate({ x: this.playerPath[player.currentIndex + 1].x - player.offsetX, y: this.playerPath[player.currentIndex + 1].y - player.offsetY }, 1000, () => {
+
+
+            if (player.currentIndex === end - 1) {
+                if (direction === 'Right') {
                     this.hideRight(player, end);
-                }else{
+                } else {
                     this.hideLeft(player, end);
                 }
                 return;
@@ -251,7 +251,7 @@ export class PlayerService {
         //     player.moveRight.animate({ x: this.playerPath[player.currentIndex + 1].x - player.offsetX, y: this.playerPath[player.currentIndex + 1].y - player.offsetY }, 1000, () => {
         //         console.log('PLAYEER ' + player.currentIndex);
         //         console.log('END - ' + end);
-                
+
         //         if (player.currentIndex === end - 1) { 
         //             console.log('PLAYER! = '+ player)  
         //             this.hideRight(player, end);
@@ -265,7 +265,7 @@ export class PlayerService {
         //     player.moveLeft.animate({ x: this.playerPath[player.currentIndex + 1].x - player.offsetX, y: this.playerPath[player.currentIndex + 1].y - player.offsetY }, 1000, () => {
         //         console.log('PLAYEER ' + player.currentIndex);
         //         console.log('END - ' + end);
-                
+
         //         if (player.currentIndex === end - 1) { 
         //             console.log('PLAYER! = '+ player)  
         //             this.hideRight(player, end);
@@ -276,7 +276,7 @@ export class PlayerService {
         //         }
         //     });
         // }
-      
+
     }
 
     private getPlayers() {
