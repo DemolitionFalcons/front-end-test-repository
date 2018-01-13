@@ -28,9 +28,9 @@
             appearance:none;
   }
 
-.map1{background-image:url('/../assets/img/map1.jpg');}
-.map2{background-image:url('/../assets/img/map1.jpg');}
-.map3{background-image:url('/../assets/img/map1.jpg');}
+.map1{background-image:url('/../assets/img/desert.jpg');}
+/* .map2{background-image:url('/../assets/img/map1.jpg');}
+.map3{background-image:url('/../assets/img/map1.jpg');} */
 
 .cc-selector input:active +.maps-style{opacity: .9;}
 .cc-selector input:checked +.maps-style{

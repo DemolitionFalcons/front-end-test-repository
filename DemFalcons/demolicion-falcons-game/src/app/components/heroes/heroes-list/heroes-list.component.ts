@@ -56,7 +56,7 @@ export class HeroesListComponent implements OnInit {
       name: 'Darcus',
       hp: 500,
       armor: 20,
-      image: '../../../../assets/img/heroes/hero-list/dracus.png',
+      image: '../../../../assets/img/heroes/hero-list/darcus.png',
       description: 'It comes from an Island far far away, and burns everything on its way'
     },{
       name: 'Leonardo',
