@@ -1,22 +1,23 @@
 
 .dice{
     position: fixed;
-    right: 1%; 
+    left: 72%; 
     top: 10%; 
     z-index: 10;
     border: 4px solid red;
     width: 25%;
     height: 250px;
+
+    
 }
 
 .game-info{
     position: fixed;
-    right: 1%; 
+    left: 72%; 
     top: 50%; 
     z-index: 10;
     border: 4px solid blue;
     width: 25%;
-    
     height: 300px;
 }
 
@@ -44,6 +45,56 @@ height: 100%;
         background: url('/../assets/img/map1background.jpg') no-repeat center center;
 }
 
-.diceHero{
-    position: fixed !important;
+
+.disestart{
+    animation: start 1s infinite;
+}
+
+@-webkit-keyframes start {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(20deg);}
+}
+
+.disethrown{
+    animation: thrown 1s infinite;
+}
+.disethrownhide{
+    display: none;
+}
+@-webkit-keyframes thrown {
+    from {right: 20%;top: 8%;     display: block;}
+    to {right: 60%;top: 50%; display: block;}
+}
+
+.hide1{
+display: none;
+}
+
+
+
+button{
+    background:  none;
+    border: none;
+    outline: none;
+    padding: 0px !important;
+    float: right;
+}
+
+.dise-start-image{
+    width: 60%;
+    float: right;
+}
+
+.dise-image{
+    width: 30%;
+    position: absolute;
+    right: 20%;
+    top: 8%; 
+}
+
+.dise-image-end{
+    width: 30%;
+    position: absolute;
+    right: 60%;
+    top: 50%; 
 }
