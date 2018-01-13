@@ -25,12 +25,12 @@ export class DiceService {
     drawDice(paper) {
 
         this.diceGif = paper.image("../../../../assets/img/rolling-dice-gif-3.gif", 1300, 50, 100, 100).attr({ 'z-index': '100' });
-        this.diceOne = paper.image('../../../../assets/img/dices/dice-one.jpg', 1150, 150, 70, 70).attr({ 'z-index': "100" });
-        this.diceTwo = paper.image('../../../../assets/img/dices/dice-two.jpg', 1150, 150, 70, 70).attr({ 'z-index': "100" });
-        this.diceThree = paper.image('../../../../assets/img/dices/dice-three.jpg', 1150, 150, 70, 70).attr({ 'z-index': "100" });
-        this.diceFour = paper.image('../../../../assets/img/dices/dice-four.jpg', 1150, 150, 70, 70).attr({ 'z-index': "100" });
-        this.diceFive = paper.image('../../../../assets/img/dices/dice-five.jpg', 1150, 150, 70, 70).attr({ 'z-index': "100" });
-        this.diceSix = paper.image('../../../../assets/img/dices/dice-six.jpg', 1150, 150, 70, 70).attr({ 'z-index': "100" });
+        this.diceOne = paper.image('../../../../assets/img/dices/dice-one.png', 1150, 150, 70, 70).attr({ 'z-index': "100" });
+        this.diceTwo = paper.image('../../../../assets/img/dices/dice-two.png', 1150, 150, 70, 70).attr({ 'z-index': "100" });
+        this.diceThree = paper.image('../../../../assets/img/dices/dice-three.png', 1150, 150, 70, 70).attr({ 'z-index': "100" });
+        this.diceFour = paper.image('../../../../assets/img/dices/dice-four.png', 1150, 150, 70, 70).attr({ 'z-index': "100" });
+        this.diceFive = paper.image('../../../../assets/img/dices/dice-five.png', 1150, 150, 70, 70).attr({ 'z-index': "100" });
+        this.diceSix = paper.image('../../../../assets/img/dices/dice-six.png', 1150, 150, 70, 70).attr({ 'z-index': "100" });
 
 
         this.diceHero = paper.image('../../../../assets/img/dices/dice-hero-rotated.png', 1300, 50, 150, 100).attr({ 'z-index': "100" });

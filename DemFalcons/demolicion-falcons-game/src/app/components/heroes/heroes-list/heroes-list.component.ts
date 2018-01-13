@@ -3,6 +3,7 @@ import { HeroModel } from '../../../core/models/hero.model';
 import { CreateGameService } from '../../../core/services/game-services/create-game.service';
 import { RemoteService } from '../../../core/services/remote.service';
 import { GameInitInfoService } from '../../../core/services/game-services/game-init-info.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-heroes-list',
@@ -21,7 +22,9 @@ export class HeroesListComponent implements OnInit {
   constructor(
     private createGameService: CreateGameService,
     private remoteService: RemoteService,
-    private gameInitInfoService: GameInitInfoService
+    private gameInitInfoService: GameInitInfoService,
+
+    private router: Router
   ) {
  
     this.heroes = [{
@@ -55,10 +58,6 @@ export class HeroesListComponent implements OnInit {
     for(let hero of this.heroes){
       this.heroesObjects[hero.name] = hero;
     }
-
-    console.log('HEROES')
-    console.log(this.heroesObjects)
-
     this.createGameService.gameObgectRecieved$.subscribe(obj => {
       this.gameObject = obj;
 
@@ -73,8 +72,6 @@ export class HeroesListComponent implements OnInit {
       this.playersArr = Array.from(Object.keys(playersObj))
 
       this.className = 'col-sm-' + 12 / this.gameObject.numberOfPlayers;
-
-
     })
   }
 
@@ -88,9 +85,9 @@ export class HeroesListComponent implements OnInit {
     })
   }
 
-  submit(form) {
-    console.log(this.gameObject)
-    console.log(form.value)
+  startGame() {
+    this.createGameService.updateGameObject(this.gameObject);
+   this.router.navigate(['/play']);
   }
 
 }

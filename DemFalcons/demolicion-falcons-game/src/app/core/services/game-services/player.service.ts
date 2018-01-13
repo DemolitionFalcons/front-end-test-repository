@@ -2,20 +2,27 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import * as Raphael from 'raphael/raphael.js';
+import { CreateGameService } from './create-game.service';
 
 @Injectable()
 export class PlayerService {
+    private gameObject;
     private playerPath;
     public players;
     private currentPlayerIndex;
     constructor(
-
+        private createGameService: CreateGameService
     ) {
-        this.players = this.getPlayers();
+        this.createGameService.gameObgectRecieved$.subscribe(data => {
+            this.gameObject = data;
+            this.players = this.getPlayers();
+
+        })
         this.playerPath = this.getPlayerPath();
         this.currentPlayerIndex = 0;
         this.movePlayer = this.movePlayer.bind(this);
         this.drawPlayers = this.drawPlayers.bind(this);
+
 
     }
 
@@ -147,7 +154,7 @@ export class PlayerService {
                     player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.moveRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000)
-                    this.move(player, player.currentIndex + num, 'Left');               
+                    this.move(player, player.currentIndex + num, 'Left');
                 });
             } else {
                 player.imageRight.animate({ y: this.playerPath[player.currentIndex].y - player.offsetY - 20, opacity: 0 }, 500, function () { this.hide() })
@@ -183,8 +190,8 @@ export class PlayerService {
 
 
 
-       
-       
+
+
     }
 
     hideRight(player, end) {
@@ -207,7 +214,7 @@ export class PlayerService {
             }
         })
     }
-    
+
     hideLeft(player, end) {
         player.currentIndex = end;
         if (this.playerPath[player.currentIndex].x > this.playerPath[player.currentIndex + 1].x) {
@@ -232,13 +239,13 @@ export class PlayerService {
     }
 
     move(player, end, direction) {
-        player['move'+direction].animate({ x: this.playerPath[player.currentIndex + 1].x - player.offsetX, y: this.playerPath[player.currentIndex + 1].y - player.offsetY }, 1000, () => {
-       
-            
-            if (player.currentIndex === end - 1) { 
-                if(direction === 'Right') {
+        player['move' + direction].animate({ x: this.playerPath[player.currentIndex + 1].x - player.offsetX, y: this.playerPath[player.currentIndex + 1].y - player.offsetY }, 1000, () => {
+
+
+            if (player.currentIndex === end - 1) {
+                if (direction === 'Right') {
                     this.hideRight(player, end);
-                }else{
+                } else {
                     this.hideLeft(player, end);
                 }
                 return;
@@ -251,7 +258,7 @@ export class PlayerService {
         //     player.moveRight.animate({ x: this.playerPath[player.currentIndex + 1].x - player.offsetX, y: this.playerPath[player.currentIndex + 1].y - player.offsetY }, 1000, () => {
         //         console.log('PLAYEER ' + player.currentIndex);
         //         console.log('END - ' + end);
-                
+
         //         if (player.currentIndex === end - 1) { 
         //             console.log('PLAYER! = '+ player)  
         //             this.hideRight(player, end);
@@ -265,7 +272,7 @@ export class PlayerService {
         //     player.moveLeft.animate({ x: this.playerPath[player.currentIndex + 1].x - player.offsetX, y: this.playerPath[player.currentIndex + 1].y - player.offsetY }, 1000, () => {
         //         console.log('PLAYEER ' + player.currentIndex);
         //         console.log('END - ' + end);
-                
+
         //         if (player.currentIndex === end - 1) { 
         //             console.log('PLAYER! = '+ player)  
         //             this.hideRight(player, end);
@@ -276,36 +283,86 @@ export class PlayerService {
         //         }
         //     });
         // }
-      
+
     }
 
     private getPlayers() {
         //http for players
 
-        // offsetX и offsetY са за да може картинките на героя да се нареждат на различни места върхуквадратчето, а не да излизат една върху друга и да се закриват
-        return [
-            {
-                hero: 'edward',
+        let players = Array.from(Object.keys(this.gameObject)).filter(k => k.startsWith('player')).map(e => e = this.gameObject[e])
+
+        let gamePLayers: Array<{}> = [];
+        for (let i = 0; i < players.length; i++) {
+            let playerOffsets = getOffset(i, players.length);
+
+            gamePLayers[i] = {
+                nickname: players[i].nickname,
+                hero: players[i].hero.toLowerCase(),
                 currentIndex: 0,
-                offsetX: 75,
-                offsetY: 160
-            }, {
-                hero: 'cloudy',
-                currentIndex: 0,
-                offsetX: 20,
-                offsetY: 160
-            },
-            {
-                hero: 'eagle',
-                currentIndex: 0,
-                offsetX: 60,
-                offsetY: 132
-            }, {
-                hero: 'stephano',
-                currentIndex: 0,
-                offsetX: 20,
-                offsetY: 130
+                offsetX: playerOffsets.offsetX,
+                offsetY: playerOffsets.offsetY
+            };
+        }
+
+        function getOffset(i, playersCount) {
+            switch (playersCount) {
+                case 1:
+                    return { offsetX: 40, offsetY:  130}
+                case 2:
+                    switch (i) {
+                        case 0:
+                            return { offsetX: 75, offsetY: 160 };
+                        case 1:
+                            return { offsetX: 20, offsetY: 130 };
+                    };
+                case 3:
+                    switch (i) {
+                        case 0:
+                            return { offsetX: 75, offsetY: 160 };
+                        case 1:
+                            return { offsetX: 20, offsetY: 160 };
+                        case 2:
+                            return { offsetX: 40, offsetY: 132 };
+                    }
+                case 4:
+                    switch (i) {
+                        case 0:
+                            return { offsetX: 75, offsetY: 160 };
+                        case 1:
+                            return { offsetX: 20, offsetY: 160 };
+                        case 2:
+                            return { offsetX: 60, offsetY: 132 };
+                        case 3:
+                            return { offsetX: 20, offsetY: 130 };
+                    }
             }
-        ]
+        }
+
+        return gamePLayers;
+        // offsetX и offsetY са за да може картинките на героя да се нареждат на различни места върхуквадратчето, а не да излизат една върху друга и да се закриват
+        // return [
+        //     {
+        //         hero: 'edward',
+        //         currentIndex: 0,
+        //         offsetX: 75,
+        //         offsetY: 160
+        //     }, {
+        //         hero: 'cloudy',
+        //         currentIndex: 0,
+        //         offsetX: 20,
+        //         offsetY: 160
+        //     },
+        //     {
+        //         hero: 'eagle',
+        //         currentIndex: 0,
+        //         offsetX: 60,
+        //         offsetY: 132
+        //     }, {
+        //         hero: 'stephano',
+        //         currentIndex: 0,
+        //         offsetX: 20,
+        //         offsetY: 130
+        //     }
+        // ]
     }
 }

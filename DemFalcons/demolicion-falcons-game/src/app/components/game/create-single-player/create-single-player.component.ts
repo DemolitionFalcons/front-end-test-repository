@@ -30,7 +30,7 @@ export class CreateSinglePlayerComponent implements OnInit {
     this.opponentsArr = new Array(Number(this.model.numberOfOpponents));
   }
 
-  createGame(form) {
+  chooseHeroes(form) {
     //this.createGameService.createGamePost(this.model);
     let gameObj = { map: this.model.map,
        name: this.model.name, 
@@ -48,8 +48,6 @@ export class CreateSinglePlayerComponent implements OnInit {
     }
 
     this.createGameService.updateGameObject(gameObj);
-    this.router.navigate(['/ChooseHero'])
+    this.router.navigate(['/ChooseHero']);
   }
-
-
 }

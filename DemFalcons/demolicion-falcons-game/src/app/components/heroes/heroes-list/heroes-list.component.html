@@ -5,7 +5,7 @@
         {{gameObject|json}}
 
         <div class="row">
-            <form (ngSubmit)="submit(createGameForm)" #createGameForm="ngForm">
+            <form (ngSubmit)="startGame()" #createGameForm="ngForm">
                 <div *ngFor="let p of playersArr; let i = index" class="player {{className}}">
                     <input type="text" class="form-control" required [(ngModel)]="gameObject[p].nickname" name="nickname{{i}}" #name="ngModel"
                         placeholder="Name" />
@@ -41,7 +41,10 @@
                         </div>
                     </div>
                 </div>
+                 <button type="submit">Start Game</button>                
             </form>
+
+
         </div>
     </div>
 </div>

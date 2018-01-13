@@ -2,7 +2,7 @@
   <div class="container">
     {{model|json}}
     <h2 class="title display-4">Create game</h2>
-    <form (ngSubmit)="createGame(createGameForm)" #createGameForm="ngForm">
+    <form (ngSubmit)="chooseHeroes(createGameForm)" #createGameForm="ngForm">
       <div class="form-group">
         <input type="text" class="form-control" required [(ngModel)]="model.name" name="name" #name="ngModel" placeholder="Name of your game">
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
@@ -52,7 +52,7 @@
       <br>
       <br>
 
-      <button type="submit" >Create your game now</button>
+      <button type="submit" >Choose Heroes</button>
     </form>
   </div>
   <br>
