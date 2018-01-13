@@ -19,12 +19,17 @@ export class GameComponent implements OnInit, OnDestroy {
   public isDiceRolled;
   public rolledDice;
 
+  public currentPlayerInfo: object;
+  public allPlayers;
+  public yourTurnMark = "Your turn";
+
   public diseStart = false;
   public diseThrown = false;
   public diseImage = true;
   public disethrownHide = true;
   public hide1 = true;
   public dise: number;
+  public indexOfPlWhoturn = 0;
 
   constructor(
     private mapService: MapService,
@@ -53,6 +58,7 @@ export class GameComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.mapService.drawMap(this.paper);
     this.playerService.drawPlayers(this.paper);
+    this.allPlayers = this.playerService.getPlayers();
     // this.diceService.drawDice(this.paper);
   }
 
