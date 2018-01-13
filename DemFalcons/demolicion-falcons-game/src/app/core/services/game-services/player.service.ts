@@ -104,10 +104,10 @@ export class PlayerService {
             { x: 444, y: 1347 },
             { x: 444, y: 1261 },
             { x: 519, y: 1218 },
-            //{ x: 594, y: 1261 },
-            //{ x: 669, y: 1304 },
-            //{ x: 744, y: 1261 },
-            //{ x: 819, y: 1304 },
+            { x: 594, y: 1261 },
+            { x: 669, y: 1304 },
+            { x: 744, y: 1261 },
+            { x: 819, y: 1304 },
             { x: 894, y: 1347 },
             { x: 969, y: 1390 },
             { x: 1044, y: 1433 },
@@ -134,8 +134,7 @@ export class PlayerService {
         return playerPath;
     }
 
-    movePlayer() {
-        let num = Math.floor(Math.random() * 6) + 1;
+    movePlayer(num) {
         console.log(num)
         console.log(this.playerPath[num])
         let player = this.players[this.currentPlayerIndex];
@@ -148,8 +147,7 @@ export class PlayerService {
                     player.imageRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000);
                     player.moveRight.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 2000)
-                    this.move(player, player.currentIndex + num, 'Left');
-                    
+                    this.move(player, player.currentIndex + num, 'Left');               
                 });
             } else {
                 player.imageRight.animate({ y: this.playerPath[player.currentIndex].y - player.offsetY - 20, opacity: 0 }, 500, function () { this.hide() })

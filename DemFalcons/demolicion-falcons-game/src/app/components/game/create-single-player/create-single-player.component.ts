@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 
 export class CreateSinglePlayerComponent implements OnInit {
 
-  public opponents = 0;
   public model: CreateSinglePlayersModel;
   public opponentsArr: Array<number>;
   public maps: Array<number>;

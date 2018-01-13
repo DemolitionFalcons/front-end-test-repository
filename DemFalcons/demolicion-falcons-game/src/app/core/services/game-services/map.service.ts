@@ -52,7 +52,6 @@ export class MapService {
                 let y2 = this.y[2] + 129
                 this.y = [y0, y1, y2];
             }
-
         }
 
         this.drawMapObjects(paper);

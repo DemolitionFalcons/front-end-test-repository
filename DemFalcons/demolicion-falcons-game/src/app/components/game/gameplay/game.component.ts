@@ -22,12 +22,12 @@ export class GameComponent implements OnInit, OnDestroy {
     private diceService: DiceService
   ) {
 
-    var width = window.document.body.clientWidth
+    let width = window.document.body.clientWidth
 
-    this.paper = Raphael('map', 50, '90%', '250%')
-    this.paper.setViewBox(0, 0, width, 1700, true);
+    this.paper = Raphael('map', 50, '100%', '250%')
+    this.paper.setViewBox(0, 0, width + 100, 1700, true);
     this.paper.canvas.setAttribute('preserveAspectRatio', 'none');
-    this.paper.image("../../../../assets/img/map1background.jpg", 0, 20, '80%', '100%');
+    this.paper.image("../../../../assets/img/map1background.jpg", 0, 20, '75%', '100%');
     this.setVisibleProperty();
   }
 
@@ -40,7 +40,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
 
-    // this.mapService.removePaper();
+  this.paper.remove();
   }
 
   private setVisibleProperty() {
