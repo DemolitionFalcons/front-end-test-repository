@@ -164,6 +164,7 @@ export class PlayerService {
                     player.imageLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 100);
                     player.moveLeft.animate({ x: this.playerPath[player.currentIndex + num].x - player.offsetX, y: this.playerPath[player.currentIndex + num].y - player.offsetY }, 100)
                     this.move(player, player.currentIndex + num, 'Right');
+
                 });
             }
         } else {
@@ -196,7 +197,6 @@ export class PlayerService {
 
     hideRight(player, end) {
         player.currentIndex = end;
-
         if (this.playerPath[player.currentIndex].x > this.playerPath[player.currentIndex + 1].x) {
             player.imageLeft.show().animate({ y: this.playerPath[player.currentIndex].y - player.offsetY, opacity: 1 }, 500);
             player.imageRight.isVisible = false;
