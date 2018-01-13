@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import * as Raphael from 'raphael/raphael.js';
 import { CreateGameService } from './create-game.service';
+import { DiceService } from './dice.service';
 
 @Injectable()
 export class PlayerService {
@@ -11,7 +12,8 @@ export class PlayerService {
     public players;
     private currentPlayerIndex;
     constructor(
-        private createGameService: CreateGameService
+        private createGameService: CreateGameService,
+        private diceService: DiceService
     ) {
         this.createGameService.gameObgectRecieved$.subscribe(data => {
             this.gameObject = data;
@@ -212,6 +214,8 @@ export class PlayerService {
             } else {
                 this.currentPlayerIndex = this.currentPlayerIndex + 1;
             }
+
+            this.diceService.setIsDiceRolled(false);
         })
     }
 
@@ -233,6 +237,8 @@ export class PlayerService {
             } else {
                 this.currentPlayerIndex = this.currentPlayerIndex + 1;
             }
+
+            this.diceService.setIsDiceRolled(false);            
         })
 
 

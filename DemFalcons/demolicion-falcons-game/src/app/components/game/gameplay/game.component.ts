@@ -16,7 +16,8 @@ import { setTimeout } from 'timers';
 export class GameComponent implements OnInit, OnDestroy {
 
   public paper;
-  public isDiceRolled = false;
+  public isDiceRolled;
+  public rolledDice;
 
   public diseStart = false;
   public diseThrown = false;
@@ -28,9 +29,8 @@ export class GameComponent implements OnInit, OnDestroy {
   constructor(
     private mapService: MapService,
     private playerService: PlayerService,
-    // private diceService: DiceService
+    private diceService: DiceService
   ) {
-
     // window.addEventListener('resize', this.windowResizing);
     let width = window.document.body.clientWidth;
 
@@ -40,6 +40,13 @@ export class GameComponent implements OnInit, OnDestroy {
     this.paper.image("../../../../assets/img/map1background.jpg", 0, 20, 1100, 1900);
     this.setVisibleProperty();
 
+    this.diceService.isDiceRolledRecieved$.subscribe(data => {
+      this.isDiceRolled = data;
+      this.rolledDice = data;
+    });
+
+    this.isDiceRolled = false;
+    this.rolledDice = false;
   }
 
 
@@ -61,34 +68,23 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   rollDice() {
-    // this.diceService.rollDice();
-    console.log('in roll dice');
-    this.dise = Math.floor(Math.random() * 6) + 1;
-    this.diseStart = true;
-    this.hide1 = true;
-    setTimeout(() => {
-      this.diseStart = false;
-      this.diseThrown = true;
-      this.disethrownHide = false;
-    }, 1000, );
-    setTimeout(() => {
-      this.disethrownHide = true;
-      this.hide1 = false;
-      this.playerService.movePlayer(this.dise);
-    }, 2000, );
-
-
-
-
-
-    // if (this.isDiceRolled === false) {
-    //   this.isDiceRolled = true;
-    //   //request for dice?
-    //   this.playerService.movePlayer();
-    //   this.isDiceRolled = false;
-    // } else {
-    //   return;
-    // }
+    if (!this.isDiceRolled) {
+      this.isDiceRolled = true;      
+      this.dise = Math.floor(Math.random() * 6) + 1;
+      this.diseStart = true;
+      this.hide1 = true;
+      setTimeout(() => {
+        this.diseStart = false;
+        this.diseThrown = true;
+        this.disethrownHide = false;
+      }, 1000, );
+      setTimeout(() => {
+        this.rolledDice = true;                
+        this.disethrownHide = true;
+        this.hide1 = false;
+        this.playerService.movePlayer(this.dise);
+      }, 2000, );
+    }
   }
 
   windowResizing() {

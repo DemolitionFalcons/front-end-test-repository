@@ -4,7 +4,7 @@
     </div>
     <div class="dice">
         <button (click)="rollDice()" [disabled]="isDiceRolled" >
-            <img class="dise-start-image" [ngClass]="{disestart: diseStart}" src="../../../../assets/img/dices/dice-hero-rotated.png" />
+            <img class="dise-start-image" [ngClass]="{disestart: diseStart, rolledDice: rolledDice}" src="../../../../assets/img/dices/dice-hero-rotated.png" />
             <img class="dise-image" [ngClass]="{disethrown: diseThrown, disethrownhide:disethrownHide}"src="../../../../assets/img/dices/dise-action.gif" />
             <img class="dise-image-end" [ngClass]="{hide1: hide1}"src="../../../../assets/img/dices/dice-{{dise}}.png" />
         </button>

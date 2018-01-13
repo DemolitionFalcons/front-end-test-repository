@@ -98,3 +98,7 @@ button{
     right: 60%;
     top: 50%; 
 }
+
+.rolledDice{
+    filter: brightness(1.8) grayscale(1) opacity(.7);
+}
