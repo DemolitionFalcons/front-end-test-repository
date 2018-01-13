@@ -31,6 +31,8 @@ export class GameComponent implements OnInit, OnDestroy {
   public dise: number;
   public indexOfPlWhoturn = 0;
 
+  private playerPathSize;
+
   constructor(
     private mapService: MapService,
     private playerService: PlayerService,
@@ -59,6 +61,9 @@ export class GameComponent implements OnInit, OnDestroy {
     this.mapService.drawMap(this.paper);
     this.playerService.drawPlayers(this.paper);
     this.allPlayers = this.playerService.getPlayers();
+    this.playerPathSize = this.playerService.getPlayerPathSize();
+    
+    console.log(this.playerPathSize);
     // this.diceService.drawDice(this.paper);
   }
 

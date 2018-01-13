@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Raphaël JS Map</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+       
+		body {
+  paddin:0;
+  margin:0; 
+}
+
+#background {
+	  position:fixed;
+	  z-index:-1;
+	  width:100%;
+	  height:100%;
+	  background: #071a1e;
+	  background: -webkit-gradient(linear, 0 0, 0 100%, from(#071a1e), to(#274249));
+	  background: -webkit-linear-gradient(#071a1e 0%, #274249 100%);
+	  background: -moz-linear-gradient(#071a1e 0%, #274249 100%);
+	  background: -o-linear-gradient(#071a1e 0%, #274249 100%);
+	  background: linear-gradient(#071a1e 0%, #274249 100%);
+}
+
+#wrapper{
+    position: relative;       
+    margin: 0 auto;  
+    top:300px;    
+    width:1px;
+    perspective: 1000px;    
+    transform-style: preserve-3d;   
+    transform: rotateX(-5deg)  translateZ(-1200px);  
+}
+.place{
+    position: absolute;
+    width: 1000px;
+    height: 1000px;  
+    left:-500px;    
+    transform-style: preserve-3d;    
+    transform: rotateX(90deg) translateZ(232px);   
+    /* background-image:url(http://st.depositphotos.com/1005171/2031/i/950/depositphotos_20315617-Wooden-chess-board-background.jpg); */
+    background-size: 100% 100%;
+}
+
+.dice {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index:1;
+    transform-style: preserve-3d;      
+    animation: go 2s linear;  
+    animation-fill-mode: forwards;     
+}
+.side {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    box-shadow:inset 0 0 10px #ccc;
+    border-radius: 10px;     
+}
+.dice .cover, #dice .inner {
+    background: #e0e0e0;
+    box-shadow: none;
+}
+.dice .cover {
+    border-radius: 0;
+}
+.dice .cover.x {
+    transform: rotateY(90deg);    
+}
+.dice .cover.z {
+    transform: rotateX(90deg);
+}
+.dice .front  {
+    transform: translateZ(25px);
+}
+.dice .front.inner  {
+    transform: translateZ(24px);
+}
+.dice .back {
+    transform: rotateX(-180deg) translateZ(25px);
+}
+.dice .back.inner {
+    transform: rotateX(-180deg) translateZ(24px);
+}
+.dice .right {
+    transform: rotateY(90deg) translateZ(25px);
+}
+.dice .right.inner {
+    transform: rotateY(90deg) translateZ(24px);
+}
+.dice .left {
+    transform: rotateY(-90deg) translateZ(25px);
+}
+.dice .left.inner {
+    transform: rotateY(-90deg) translateZ(24px);
+}
+.dice .top {
+    transform: rotateX(90deg) translateZ(25px);
+}
+.dice .top.inner {
+    transform: rotateX(90deg) translateZ(24px);
+}
+.dice .bottom {
+    transform: rotateX(-90deg) translateZ(25px);
+}
+.dice .bottom.inner {
+    transform: rotateX(-90deg) translateZ(24px);
+}
+
+.side.bg{  
+  background-image:url(http://images.businessweek.com/ss/07/11/1111_giftguide_cars/image/intro.jpg);   
+  background-size: 100% 100%;
+}
+
+.side.win{
+  background-image:url(https://4.bp.blogspot.com/-rhoeRSqOXk4/UIbKTaYlDXI/AAAAAAAAQho/XvrfkftFu3o/s400/winner.jpg);  
+  background-size: 100% 100%;
+}
+
+@keyframes go{
+   0% { transform: translate3d(240px,0px,0px) rotateX(0deg)  rotateY(0deg)   }   
+   50% { transform: translate3d(80px,80px,350px) rotateX(-160deg)  rotateY(0deg)   }
+   100% { transform: translate3d(0px,80px,650px) rotateX(-360deg)  rotateY(-360deg)   }  
+}
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <div style="display: inline-block">
+            <button id="moveFalcon">Move Falcon</button>
+        </div>
+        <div style="display: inline-block">
+            <button id="moveCloudy">Move Cloudy</button>
+        </div>
+
+    </div>
+    <div id="wrapper" class="game-map" style="display: inline-block">
+        <!-- Raphaël JS Map Here -->
+    </div>
+	
+	<div id="background"></div>
+<div id="wrapper">  
+    <!-- <div class="dice">
+      <div class="side front bg"> </div>  
+      <div class="side front inner"></div>
+      <div class="side top bg win"> </div>    
+      <div class="side top inner"></div>
+      <div class="side right bg"></div>  
+      <div class="side right inner"></div>
+      <div class="side left bg "></div>  
+      <div class="side left inner"></div>
+      <div class="side bottom bg"> </div>  
+      <div class="side bottom inner"></div>
+      <div class="side back bg"></div>  
+      <div class="side back inner"></div>
+      <div class="side cover x"></div>
+      <div class="side cover y"></div>
+      <div class="side cover z"></div>
+    </div>       -->
+    <!-- <div class="place">
+
+    </div> -->
+    <!-- <img src="http://st.depositphotos.com/1005171/2031/i/950/depositphotos_20315617-Wooden-chess-board-background.jpg" class="place" /> -->
+</div>
+
+
+    <script src="raphael-min.js"></script>
+    <script src="map.js"></script>
+</body>
+
+</html>

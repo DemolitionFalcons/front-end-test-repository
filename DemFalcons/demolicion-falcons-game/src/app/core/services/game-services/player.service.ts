@@ -143,6 +143,10 @@ export class PlayerService {
         return playerPath;
     }
 
+    getPlayerPathSize(){
+        return this.playerPath.length;
+    }
+
     movePlayer(num) {
         console.log(num)
         console.log(this.playerPath[num])
@@ -292,7 +296,7 @@ export class PlayerService {
 
     }
 
-    private getPlayers() {
+     getPlayers() {
         //http for players
 
         let players = Array.from(Object.keys(this.gameObject)).filter(k => k.startsWith('player')).map(e => e = this.gameObject[e])

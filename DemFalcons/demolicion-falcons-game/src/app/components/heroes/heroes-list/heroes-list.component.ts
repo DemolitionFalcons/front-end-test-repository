@@ -45,13 +45,25 @@ export class HeroesListComponent implements OnInit {
       hp: 500,
       armor: 20,
       image: '../../../../assets/img/heroes/hero-list/edward.png',
-      description: 'It comes from a Cloudysland,drives skate and has a strange hairstyle'
+      description: 'It comes from nowhere,wears jacket and rocks'
     },{
       name: 'Stephano',
       hp: 500,
       armor: 20,
       image: '../../../../assets/img/heroes/hero-list/stephano.png',
-      description: 'It comes from a Cloudysland,drives skate and has a strange hairstyle'
+      description: 'It comes from a Scary place, eats brains and frightens children'
+    },{
+      name: 'Darcus',
+      hp: 500,
+      armor: 20,
+      image: '../../../../assets/img/heroes/hero-list/dracus.png',
+      description: 'It comes from an Island far far away, and burns everything on its way'
+    },{
+      name: 'Leonardo',
+      hp: 500,
+      armor: 20,
+      image: '../../../../assets/img/heroes/hero-list/leonardo.png',
+      description: 'It comes from the Savanah , fallen king looking for revange'
     }];
 
     this.heroesObjects = {};
