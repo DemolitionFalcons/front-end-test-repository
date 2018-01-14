@@ -64,7 +64,6 @@ export class GameComponent implements OnInit, OnDestroy {
     this.allPlayers = this.playerService.getPlayers();
     this.playerPathSize = this.playerService.getPlayerPathSize();
 
-    console.log(this.playerPathSize);
     console.log(this.allPlayers);
     // this.diceService.drawDice(this.paper);
   }
@@ -82,7 +81,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   rollDice() {
 
-    this.heroLocation = Math.ceil(this.playerPathSize / this.currentPlayerInfo.currentIndex);
+
     if (!this.isDiceRolled) {
       this.isDiceRolled = true;
       this.dise = Math.floor(Math.random() * 6) + 1;
@@ -98,8 +97,9 @@ export class GameComponent implements OnInit, OnDestroy {
         this.disethrownHide = true;
         this.hide1 = false;
         this.playerService.movePlayer(this.dise).subscribe(data => {
-          console.log(data)
-          this.currentPlayerInfo = data
+
+          this.currentPlayerInfo = data;
+          this.heroLocation = Math.ceil(this.currentPlayerInfo.currentIndex + this.dise * 100 / this.playerPathSize);
         })
       }, 2000, );
     }
