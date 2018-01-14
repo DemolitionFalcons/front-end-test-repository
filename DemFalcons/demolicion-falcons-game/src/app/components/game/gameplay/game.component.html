@@ -3,14 +3,18 @@
 
     </div>
     <div class="dice">
-        <button (click)="rollDice()" [disabled]="isDiceRolled" >
-            <img class="dise-start-image" [ngClass]="{disestart: diseStart, rolledDice: rolledDice}" src="../../../../assets/img/dices/dice-hero-rotated.png" />
-            <img class="dise-image" [ngClass]="{disethrown: diseThrown, disethrownhide:disethrownHide}"src="../../../../assets/img/dices/dise-action.gif" />
-            <img class="dise-image-end" [ngClass]="{hide1: hide1}"src="../../../../assets/img/dices/dice-{{dise}}.png" />
+        <button (click)="rollDice()" [disabled]="isDiceRolled">
+            <img class="dise-start-image" [ngClass]="{disestart: diseStart, rolledDice: rolledDice}" src="../../../../assets/img/dices/dice-hero-rotated.png"
+            />
+            <img class="dise-image" [ngClass]="{disethrown: diseThrown, disethrownhide:disethrownHide}" src="../../../../assets/img/dices/dise-action.gif"
+            />
+            <img class="dise-image-end" [ngClass]="{hide1: hide1}" src="../../../../assets/img/dices/dice-{{dise}}.png" />
         </button>
     </div>
     <div class="game-info">
         <h1>Game info</h1>
+        <div *ngFor="let player of allPlayers">{{player.nickname}} {{player.currentIndex}}</div>
+        <h1>{{currentPlayerInfo.hero ? currentPlayerInfo.hero:null}}--->{{heroLocation}}%</h1>
     </div>
 
 </div>

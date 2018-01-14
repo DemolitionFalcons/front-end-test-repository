@@ -92,7 +92,8 @@ export class HeroesListComponent implements OnInit {
   }
 
   sendGameObjectToServer() {
-    this.remoteService.sendGameObject(this.gameObject).subscribe(data => {
+    this.remoteService.sendGameObject(this.gameObject).subscribe(data => { 
+    // this.createGameService.updateGameObject(this.gameObject) 
       this.gameInitInfoService.updateGameInitialInfot(data);
     })
   }

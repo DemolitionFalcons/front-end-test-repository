@@ -19,9 +19,10 @@ export class GameComponent implements OnInit, OnDestroy {
   public isDiceRolled;
   public rolledDice;
 
-  public currentPlayerInfo: object;
+  public currentPlayerInfo;
   public allPlayers;
   public yourTurnMark = "Your turn";
+  public heroLocation;
 
   public diseStart = false;
   public diseThrown = false;
@@ -62,8 +63,9 @@ export class GameComponent implements OnInit, OnDestroy {
     this.playerService.drawPlayers(this.paper);
     this.allPlayers = this.playerService.getPlayers();
     this.playerPathSize = this.playerService.getPlayerPathSize();
-    
+
     console.log(this.playerPathSize);
+    console.log(this.allPlayers);
     // this.diceService.drawDice(this.paper);
   }
 
@@ -79,8 +81,10 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   rollDice() {
+
+    this.heroLocation = Math.ceil(this.playerPathSize / this.currentPlayerInfo.currentIndex);
     if (!this.isDiceRolled) {
-      this.isDiceRolled = true;      
+      this.isDiceRolled = true;
       this.dise = Math.floor(Math.random() * 6) + 1;
       this.diseStart = true;
       this.hide1 = true;
@@ -90,12 +94,16 @@ export class GameComponent implements OnInit, OnDestroy {
         this.disethrownHide = false;
       }, 1000, );
       setTimeout(() => {
-        this.rolledDice = true;                
+        this.rolledDice = true;
         this.disethrownHide = true;
         this.hide1 = false;
-        this.playerService.movePlayer(this.dise);
+        this.playerService.movePlayer(this.dise).subscribe(data => {
+          console.log(data)
+          this.currentPlayerInfo = data
+        })
       }, 2000, );
     }
+
   }
 
   windowResizing() {

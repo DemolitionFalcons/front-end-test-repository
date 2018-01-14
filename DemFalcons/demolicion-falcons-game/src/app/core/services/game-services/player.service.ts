@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import * as Raphael from 'raphael/raphael.js';
 import { CreateGameService } from './create-game.service';
 import { DiceService } from './dice.service';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class PlayerService {
@@ -143,16 +144,13 @@ export class PlayerService {
         return playerPath;
     }
 
-    getPlayerPathSize(){
+    getPlayerPathSize() {
         return this.playerPath.length;
     }
 
-    movePlayer(num) {
-        console.log(num)
-        console.log(this.playerPath[num])
-        let player = this.players[this.currentPlayerIndex];
+    movePlayer(num): Observable<any> {
+        const player = this.players[this.currentPlayerIndex];
         if (player.imageRight.isVisible) {
-
             if (this.playerPath[player.currentIndex + num].x < this.playerPath[player.currentIndex].x) {
                 player.imageRight.animate({ y: this.playerPath[player.currentIndex].y - player.offsetY - 20, opacity: 0 }, 500, function () { this.hide() })
 
@@ -195,9 +193,7 @@ export class PlayerService {
             }
         }
 
-
-
-
+        return Observable.of(this.players[this.currentPlayerIndex]);
 
     }
 
@@ -242,7 +238,7 @@ export class PlayerService {
                 this.currentPlayerIndex = this.currentPlayerIndex + 1;
             }
 
-            this.diceService.setIsDiceRolled(false);            
+            this.diceService.setIsDiceRolled(false);
         })
 
 
@@ -296,7 +292,7 @@ export class PlayerService {
 
     }
 
-     getPlayers() {
+    getPlayers() {
         //http for players
 
         let players = Array.from(Object.keys(this.gameObject)).filter(k => k.startsWith('player')).map(e => e = this.gameObject[e])
@@ -317,7 +313,7 @@ export class PlayerService {
         function getOffset(i, playersCount) {
             switch (playersCount) {
                 case 1:
-                    return { offsetX: 40, offsetY:  130}
+                    return { offsetX: 40, offsetY: 130 }
                 case 2:
                     switch (i) {
                         case 0:
@@ -375,4 +371,6 @@ export class PlayerService {
         //     }
         // ]
     }
+
+    
 }
